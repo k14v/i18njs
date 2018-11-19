@@ -1,9 +1,9 @@
 export default (catalog = {}) => {
-  const process = (literal) => literal;
+  const process = (literal) => literal
 
   return {
-    __(literal) {
-      return catalog[literal] || literal;
+    __: (literal) => {
+      return process(catalog[literal] || literal)
     }
   }
 }
