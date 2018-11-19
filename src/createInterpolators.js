@@ -1,4 +1,4 @@
-const catalogCheckerDecorator = (catalog) => fn => (...args) => {
+const createCatalogChecker = (catalog) => fn => (...args) => {
   if (!catalog && process.env.NODE_ENV !== 'production') {
     console.warn(`// WARNING: Not catalog defined yet when calling interpolator with arguments: ${args}`);
   }
@@ -20,6 +20,7 @@ const getterLiteral = catalog => literal => {
 
 export default (catalog) => {
   const process = (literal) => literal;
+  const catalogChecker = createCatalogChecker(catalog);
   const getLiteral = getterLiteral(catalog);
   const interpolators = {
     __: (literal) => process(getLiteral(literal))
@@ -27,6 +28,6 @@ export default (catalog) => {
 
   return Object.keys(interpolators).reduce((prev, inName) => ({
     ...prev,
-    [inName]: catalogCheckerDecorator(catalog)(interpolators[inName]) }),
+    [inName]: catalogChecker(interpolators[inName]) }),
   {});
 };
