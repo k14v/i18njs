@@ -1,0 +1,12 @@
+language: node_js
+sudo: false
+os:
+ - linux
+env:
+ - TEST=true
+node_js:
+  - "8.12"
+install:
+  - 'npm install'
+script:
+  - 'npm test'
