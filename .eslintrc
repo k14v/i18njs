@@ -1,4 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": "standard"
+  "extends": "standard",
+  "rules": {
+    "semi": [2, "always"]
+  }
 }
