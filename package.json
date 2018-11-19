@@ -1,0 +1,65 @@
+{
+  "name": "i18njs",
+  "version": "0.0.1",
+  "description": "internationalization",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "nyc --reporter=html --reporter=text ava --verbose",
+    "build": "babel src --out-dir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rubeniskov/i18njs.git"
+  },
+  "keywords": [
+    "i18n"
+  ],
+  "author": "",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-export-namespace-from"
+    ]
+  },
+  "ava": {
+    "files": [
+      "**/*.spec.js"
+    ],
+    "require": [
+      "@babel/register"
+    ]
+  },
+  "dependencies": {
+    "make-plural": "^4.3.0",
+    "math-interval-parser": "^2.0.0",
+    "messageformat": "^2.0.4",
+    "mustache": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/register": "^7.0.0",
+    "ava": "^1.0.0-rc.1",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "machine-uuid": "^1.2.0",
+    "nyc": "^13.0.1",
+    "sinon": "^7.1.1"
+  },
+  "peerDependencies": {}
+}
