@@ -1,10 +1,13 @@
 import createStore from './createStore';
 import createInterpolators from './createInterpolators';
 
-export default (options) => {
+export default (options = {}) => {
   options = { ...options };
-  const locales = options.locales;
-  const cache = {};
+  // options.locales has to be an array of string with the supported locales,
+  // otherwise if object is provided only the keys will be used
+  const locales = Array.isArray(options.locales) ? options.locales : Object.keys(options.locales || {});
+  // if options.locales has own properties defined will extend the cache as sync catalog
+  const cache = { ...options.locales };
   const fallbacks = options.fallbacks || {};
   const store = createStore(locales, options.resolver, cache);
   const defaultLocale = options.locale || (locales && locales[0]);

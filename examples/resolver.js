@@ -1,14 +1,10 @@
 import i18njs from '..';
 
 const i18n = i18njs({
-  locales: {
-    en: {
-      'esto es una prueba': 'this is a test'
-    },
-    de: {
-      'esto es una prueba': 'Das ist ein Test'
-    }
-  }
+  locales: ['en', 'de'],
+  resolver: (locale) => ({
+    'esto es una prueba': locale === 'en' ? 'this is a test' : 'Das ist ein Test'
+  })
 });
 
 console.log(i18n.in.__('esto es una prueba'));

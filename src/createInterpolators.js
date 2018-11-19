@@ -1,6 +1,10 @@
 const createCatalogChecker = (catalog) => fn => (...args) => {
-  if (!catalog && process.env.NODE_ENV !== 'production') {
-    console.warn(`// WARNING: Not catalog defined yet when calling interpolator with arguments: ${args}`);
+  if (catalog === null && process.env.NODE_ENV !== 'production') {
+    console.warn(`// WARNING: Catalog not loaded yet when calling interpolator with arguments: ${args}`);
+  }
+
+  if (catalog === undefined && process.env.NODE_ENV !== 'production') {
+    console.warn(`// WARNING: Not catalog defined when calling interpolator with arguments: ${args}`);
   }
 
   return fn(...args);
