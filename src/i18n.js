@@ -11,7 +11,9 @@ export default (options) => {
   let currentLocale = defaultLocale;
 
   const self = {
-    in: createInterpolators(cache[currentLocale]),
+    // To preserve the interpolator functions we pass a null catalog
+    // to force the checker raise a warning when the interpolators being called
+    in: createInterpolators(null),
     onReady: store.then.bind(store),
     onFail: store.catch.bind(store),
     setLocale (locale) {
