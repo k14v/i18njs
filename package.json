@@ -4,14 +4,15 @@
   "description": "Library to internationalize literals",
   "main": "src/index.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text ava --verbose",
+    "test": "nyc --reporter=lcov --reporter=html --reporter=text ava --verbose",
     "test:watch": "ava --watch",
     "build": "babel src --out-dir lib",
     "watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "example": "npm run build && babel-node examples/basic.js"
+    "example": "npm run build && babel-node examples/basic.js",
+    "coverage": "codecov"
   },
   "husky": {
     "hooks": {
@@ -56,6 +57,7 @@
     "@babel/register": "^7.0.0",
     "ava": "^1.0.0-rc.1",
     "babel-eslint": "^10.0.1",
+    "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.9.0",
     "eslint-config-standard": "^12.0.0",
