@@ -1,7 +1,7 @@
 export const defaultResolver = (locale, locales, cache) => {
-  console.warn(`Not resolver implemented for locale: ${locale}`)
-  return Promise.resolve({})
-}
+  console.warn(`Not resolver implemented for locale: ${locale}`);
+  return Promise.resolve({});
+};
 
 export default (
   locales = [],
@@ -17,4 +17,4 @@ export default (
     .reduce((cacheChain, next) =>
       cacheChain
         .then(next),
-    Promise.resolve(rootCache))
+    Promise.resolve(rootCache));
