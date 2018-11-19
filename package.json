@@ -13,6 +13,12 @@
     "lint:fix": "eslint src --fix",
     "example": "npm run build && babel-node examples/basic.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test",
+      "pre-push": "npm run lint && npm test"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:rubeniskov/i18njs.git"
