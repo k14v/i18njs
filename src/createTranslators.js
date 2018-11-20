@@ -1,11 +1,9 @@
-const createCatalogChecker = (catalog) => fn => (...args) => {
-  if (catalog === null && process.env.NODE_ENV !== 'production') {
-    console.warn(`// WARNING: Catalog not loaded yet when calling interpolator with arguments: ${args}`);
-  }
+import { warn, assert } from './utils';
 
-  if (catalog === undefined && process.env.NODE_ENV !== 'production') {
-    console.warn(`// WARNING: Not catalog defined when calling interpolator with arguments: ${args}`);
-  }
+const createCatalogChecker = (catalog) => fn => (...args) => {
+  assert(catalog !== null, `Catalog not loaded yet when calling interpolator with arguments: ${args}`);
+
+  assert(catalog !== undefined, `Not catalog defined when calling interpolator with arguments: ${args}`);
 
   return fn(...args);
 };
@@ -15,9 +13,7 @@ const getterLiteral = catalog => literal => {
     return catalog[literal];
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    console.warn(`// WARNING: Missing literal translation "${literal}" in catalog, using it as fallback`);
-  }
+  warn(`Missing literal translation "${literal}" in catalog, using it as fallback`);
 
   return literal;
 };

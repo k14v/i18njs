@@ -1,8 +1,7 @@
-export const defaultResolver = (locale, locales, cache) => {
-  if (!cache[locale] && process.env.NODE_ENV !== 'production') {
-    console.warn(`// WARNING: No resolver implemented for locale: ${locale}`);
-  }
+import { assert } from './utils';
 
+export const defaultResolver = (locale, locales, cache) => {
+  assert(cache[locale], `No resolver implemented for locale: ${locale}`);
   return Promise.resolve(cache[locale] || {});
 };
 
