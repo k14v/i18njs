@@ -2,6 +2,7 @@
   "parser": "babel-eslint",
   "extends": "standard",
   "rules": {
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "comma-dangle": ["error", "always-multiline"]
   }
 }
