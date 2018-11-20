@@ -1,9 +1,9 @@
 import { warn, assert } from './utils';
 
 const createCatalogChecker = (catalog) => fn => (...args) => {
-  assert(catalog !== null, `Catalog not loaded yet when calling interpolator with arguments: ${args}`);
+  assert(catalog !== null, `Catalog not loaded yet when calling translator with arguments: ${args}`);
 
-  assert(catalog !== undefined, `Not catalog defined when calling interpolator with arguments: ${args}`);
+  assert(catalog !== undefined, `Not catalog defined when calling translator with arguments: ${args}`);
 
   return fn(...args);
 };
@@ -22,12 +22,12 @@ export default (catalog) => {
   const process = (literal) => literal;
   const catalogChecker = createCatalogChecker(catalog);
   const getLiteral = getterLiteral(catalog);
-  const interpolators = {
-    __: (literal) => process(getLiteral(literal))
+  const translators = {
+    __: (literal) => process(getLiteral(literal)),
   };
 
-  return Object.keys(interpolators).reduce((prev, inName) => ({
+  return Object.keys(translators).reduce((prev, trlsName) => ({
     ...prev,
-    [inName]: catalogChecker(interpolators[inName]) }),
+    [trlsName]: catalogChecker(translators[trlsName]) }),
   {});
 };

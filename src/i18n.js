@@ -21,8 +21,8 @@ export default (options = {}) => {
   assert(defaultLocale, 'No default locale configured in options');
 
   const self = {
-    // To preserve the interpolator functions we pass a null catalog
-    // to force the checker raise a warning when the interpolators being called
+    // To preserve the translator functions we pass a null catalog
+    // to force the checker raise a warning when the translators being called
     trls: createTranslators(null),
     onReady: store.then.bind(store),
     onFail: store.catch.bind(store),
@@ -35,7 +35,7 @@ export default (options = {}) => {
     getLocales () {
       return Object.keys(locales);
     },
-    get getLocale () {
+    getLocale () {
       return currentLocale;
     },
     getCatalog (locale = currentLocale) {
@@ -43,7 +43,7 @@ export default (options = {}) => {
     },
     getCatalogs () {
       return locales;
-    }
+    },
   };
 
   return self;
