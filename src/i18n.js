@@ -21,16 +21,16 @@ export default (options = {}) => {
   assert(defaultLocale, 'No default locale configured in options');
 
   const self = {
+    ...store,
     // To preserve the translator functions we pass a null catalog
     // to force the checker raise a warning when the translators being called
     trls: createTranslators(null),
-    onReady: store.then.bind(store),
-    onFail: store.catch.bind(store),
     setLocale (locale) {
       let targetLocale = !cache[locale] && fallbacks[locale] ? fallbacks[locale] : locale;
-      targetLocale = locales.includes(targetLocale) ? targetLocale : defaultLocale;
-      self.trls = createTranslators(cache[currentLocale = targetLocale]);
-      return self.getCatalog();
+      targetLocale = currentLocale = locales.includes(targetLocale) ? targetLocale : defaultLocale;
+      return store.resolve(targetLocale).then((catalog) => {
+        return (self.trls = createTranslators(catalog));
+      });
     },
     getLocales () {
       return Object.keys(locales);
