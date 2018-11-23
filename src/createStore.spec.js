@@ -32,5 +32,6 @@ test('should raise reject when try resolve a locale that doesn\'t exists', async
 test.todo('should return a catalog using locales map');
 test.todo('should return a catalog using resolver async');
 
+test.todo('should return a unsubscribe event when calling on method');
 test.todo('should raise event error when try resolve an undefined locale');
 test.todo('should raise event error when try resolve a locale that doesn\'t exists');
