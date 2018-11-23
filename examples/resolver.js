@@ -21,20 +21,30 @@ const locales = {
 const i18n = i18njs({
   locales: ['es', 'en', 'de'],
   locale: 'es',
-  resolver: (locale) => locales[locale],
+  resolver: (locale) => new Promise((resolve, reject) => setTimeout(() => resolve(locales[locale]), 2000)),
+});
+
+i18n.on('loading', ({ locale }) => {
+  console.log(`loading locale: ${locale}`);
+});
+
+i18n.on('loaded', ({ locale }) => {
+  console.log(`loaded locale: ${locale}`);
 });
 
 console.log(i18n.trls.__('esto es una prueba'));
+console.log(i18n.trls.__('Teléfono'));
 
-i18n.onReady(() => {
-  console.log(i18n.trls.__('esto es una prueba'));
-  console.log(i18n.trls.__('Teléfono'));
+setTimeout(() => {
+  i18n.setLocale('en').then(trls => {
+    console.log(trls.__('esto es una prueba'));
+    console.log(trls.__('Teléfono'));
+  });
+}, 2000);
 
-  i18n.setLocale('en');
-
-  console.log(i18n.trls.__('Teléfono'));
-
-  i18n.setLocale('de');
-
-  console.log(i18n.trls.__('Perro'));
-});
+setTimeout(() => {
+  i18n.setLocale('de').then(trls => {
+    console.log(i18n.trls.__('esto es una prueba'));
+    console.log(i18n.trls.__('Teléfono'));
+  });
+}, 4000);
