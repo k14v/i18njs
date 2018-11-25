@@ -1,6 +1,7 @@
 import test from 'ava';
 import createStore, { ERR_MSGS, STORE_EVENTS } from './createStore';
 
+
 test('should return a store', (t) => {
   const store = createStore();
   t.truthy(store);

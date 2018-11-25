@@ -1,5 +1,6 @@
 import i18njs from '..';
 
+
 const locales = {
   es: {
     'esto es una prueba': 'esto es una prueba',
@@ -31,6 +32,12 @@ i18n.on('loading', ({ locale }) => {
 i18n.on('loaded', ({ locale }) => {
   console.log(`loaded locale: ${locale}`);
 });
+
+const unsubscribe = i18n.subscribe(({ type, locale }) => {
+  console.log(`Sub ${type} locale: ${locale}`);
+});
+
+console.log(unsubscribe);
 
 console.log(i18n.trls.__('esto es una prueba'));
 console.log(i18n.trls.__('Teléfono'));

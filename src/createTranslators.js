@@ -1,5 +1,6 @@
 import { warn, assert } from './utils';
 
+
 const createCatalogChecker = (catalog) => fn => (...args) => {
   assert(catalog !== null, `Catalog not loaded yet when calling translator with arguments: ${args}`);
 

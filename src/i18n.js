@@ -2,6 +2,7 @@ import { assert } from './utils';
 import createStore from './createStore';
 import createTranslators from './createTranslators';
 
+
 export default (options = {}) => {
   options = { ...options };
   // options.locales has to be an array of string with the supported locales,
