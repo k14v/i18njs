@@ -1,5 +1,6 @@
 import i18njs from '..';
 
+
 const i18n = i18njs({
   locales: {
     es: {
