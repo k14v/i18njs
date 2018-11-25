@@ -1,5 +1,5 @@
 import test from 'ava';
-import createStore, { ERR_MSGS } from './createStore';
+import createStore, { ERR_MSGS, STORE_EVENTS } from './createStore';
 
 test('should return a store', (t) => {
   const store = createStore();
@@ -29,9 +29,129 @@ test('should raise reject when try resolve a locale that doesn\'t exists', async
   t.is(error.message, ERR_MSGS.LOCALE_NOT_FOUND);
 });
 
-test.todo('should return a catalog using locales map');
-test.todo('should return a catalog using resolver async');
+test('should return a catalog using locales map', async t => {
+  const localeEN = {};
+  const store = createStore({
+    cache: {
+      'en': localeEN,
+    },
+  });
 
-test.todo('should return a unsubscribe event when calling on method');
-test.todo('should raise event error when try resolve an undefined locale');
-test.todo('should raise event error when try resolve a locale that doesn\'t exists');
+  const catalog = await store.resolve('en');
+
+  t.true(localeEN === catalog);
+});
+
+test('should call the resolver with the options passed by arguments', async t => {
+  t.plan(2);
+  const localeES = 'es';
+  const testArg = 'foo';
+  const store = createStore({
+    testArg,
+    resolver: (locale, cache, { testArg: rTestArg }) => {
+      t.is(locale, localeES);
+      t.is(rTestArg, testArg);
+      return {};
+    },
+  });
+
+  await store.resolve(localeES);
+});
+
+test('should return a catalog using resolver async', async t => {
+  const localeEN = {};
+  const store = createStore({
+    resolver: locale => new Promise(resolve => setTimeout(() => resolve(localeEN), 600)),
+  });
+
+  const catalog = await store.resolve('en');
+
+  t.true(localeEN === catalog);
+});
+
+Object.values(STORE_EVENTS).map(eventName => {
+  test(`should subscribe to ${eventName} event`, async t => {
+    const store = createStore({
+      cache: { en: {} },
+    });
+
+    const listener = (mixed) => {
+      if (eventName === 'error') {
+        t.is(mixed.message, ERR_MSGS.LOCALE_NOT_FOUND);
+      } else {
+        t.is(mixed.locale, 'en');
+        t.truthy(mixed.cache);
+      }
+    };
+
+    t.plan(eventName === 'error' ? 3 : 4);
+
+    store.subscribe(eventName, listener);
+
+    store.on(eventName, listener);
+
+    if (eventName === 'error') {
+      t.plan(3);
+      await t.throwsAsync(store.resolve('es'));
+    } else {
+      t.plan(4);
+      await store.resolve('en');
+    }
+  });
+
+  test(`should unsubscribe of event ${eventName}`, async t => {
+    const store = createStore({
+      cache: { en: {} },
+    });
+
+    const unsubscribe = store.subscribe(eventName, () => {
+      t.fail();
+    });
+
+    unsubscribe();
+    if (eventName === 'error') {
+      await t.throwsAsync(store.resolve('es'));
+    } else {
+      await store.resolve('en');
+    }
+    t.pass();
+  });
+});
+
+test('should subscribe all events', async t => {
+  const store = createStore({
+    cache: { en: {} },
+  });
+
+  const sequence = ['loading', 'loaded', 'loading', 'error'];
+  let index = 0;
+
+  t.plan(5);
+  store.subscribe(({ type }) => {
+    t.is(type, sequence[index++]);
+  });
+
+  await store.resolve('en');
+  await t.throwsAsync(store.resolve('es'));
+});
+
+test('should unsubscribe of any events', async t => {
+  const store = createStore({
+    cache: { en: {} },
+  });
+
+  const unsubscribe = store.subscribe((eventName) => {
+    t.fail();
+  });
+
+  t.is(typeof unsubscribe, 'function');
+
+  unsubscribe();
+  await store.resolve('en');
+});
+
+// test.todo('should return a catalog using resolver async');
+
+// test.todo('should return a unsubscribe event when calling on method');
+// test.todo('should raise event error when try resolve an undefined locale');
+// test.todo('should raise event error when try resolve a locale that doesn\'t exists');
