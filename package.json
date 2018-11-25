@@ -4,7 +4,7 @@
   "description": "Library to internationalize literals",
   "main": "src/index.js",
   "scripts": {
-    "test": "nyc --reporter=lcov --reporter=html --reporter=text ava --verbose",
+    "test": "nyc --reporter=lcov --reporter=html --reporter=text ava",
     "test:watch": "ava --watch",
     "build": "babel src --out-dir lib",
     "watch": "npm run build -- --watch",
