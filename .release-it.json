@@ -1,15 +1,9 @@
 {
   "src": {
     "commit": true,
-    "commitMessage": "[skip ci] Release %s",
+    "commitMessage": "release: Release %s",
     "push": true,
     "tag": true
-  },
-  "github": {
-    "release": true
-  },
-  "npm": {
-    "publish": true
   },
   "requireUpstream": false
 }
