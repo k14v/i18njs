@@ -1,0 +1,6 @@
+*
+!lib/*
+!index.js
+*.spec.js
+!LICENSE
+!README.md
