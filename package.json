@@ -13,7 +13,7 @@
     "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
     "coverage": "codecov",
-    "release": "release-it --no-npm.publish --src.tagName='v%s' --github.release"
+    "release": "release-it -n"
   },
   "husky": {
     "hooks": {
@@ -77,6 +77,5 @@
     "nyc": "^13.0.1",
     "release-it": "^8.0.1",
     "sinon": "^7.1.1"
-  },
-  "peerDependencies": {}
+  }
 }
