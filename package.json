@@ -50,6 +50,11 @@
       "@babel/register"
     ]
   },
+  "nyc": {
+    "exclude": [
+      "src/*.spec.js"
+    ]
+  },
   "dependencies": {
     "make-plural": "^4.3.0",
     "math-interval-parser": "^2.0.0",
