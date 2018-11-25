@@ -1,1 +1,1 @@
-module.exports = require('./lib/i18n');
+module.exports = require('./lib/i18n').default;
