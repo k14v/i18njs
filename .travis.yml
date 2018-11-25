@@ -4,13 +4,6 @@ cache:
   bundler: true
   directories:
   - node_modules # NPM packages
-deploy:
-  provider: npm
-  email: rubeniskov@gmail.com
-  api_key:
-    secure: F3V5TEs7jPc76Aj8QLf0qNgh/kch+o+OWBEW9J/uIqJH45BEh9GYzw8hYKyEvTANml6HqMj/SosAQ6QIv5T9FiEfyOS8/1VaZrq5txTlDx92XfAsr+Rw0CrWFF+ZVsNoGzNCO7eWYGdYeQggw3jIMKc9ojY1SoqjiuD++lBNPeuiVFTMAJb2RasPrY+IwDal+iqFaTpICzpmvRv9NPoT02d5XplQjeZpM+34qxf4uJXPrU88Im4papdRl9wiDtHjZS1ioiBDZSpJ/QriwbaI6mKrPQ56nFoUDWoievTRnlD/zYQS8hpKuAewqOkkiS9KqKhy2VJfw2dc4mIG+FCJoEF9yupgP8om82t1ZhgLu2TLtyif3jcgwPPKdZvs+WEBu5Q9tOTg/RAyAHIMohFzq3LA8nyqPn/SEv+6Ze0p948KnI8RsnbsdBCCjB4Ypz4pdJsCFjbc0yFnIRH7RVahEN2GA7iOLBBP669JzTz+CS1LVluD9tyfJOCj9/eGNewJA1AitGtYZO2gqx+il389N3h+fRw3W9IAm1gIJYP6ask+KC23/OTHaL23+qeH8hlUracu0H41J2nla+pwchSToGw2WrnfiLqjlBWK+MIakPO5cDn/LqAMEs4HQxY7ygaoWls/4I5qve6b6EUf762KePEMVc4kxEm93e4ECN1mXyQ=
-  on:
-    tags: true
 os:
 - linux
 env:
