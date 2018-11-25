@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": "standard",
+  "rules": {
+    "semi": [2, "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "import/newline-after-import": ["error", { "count": 2 }],
+    "no-multiple-empty-lines": "off"
+  }
+}
