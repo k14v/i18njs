@@ -8,7 +8,7 @@
     "test:watch": "ava --watch",
     "build": "babel src --out-dir lib",
     "watch": "npm run build -- --watch",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run lint && npm run test",
     "lint": "eslint src examples",
     "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
