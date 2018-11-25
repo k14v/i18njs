@@ -12,7 +12,8 @@
     "lint": "eslint src examples",
     "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
-    "coverage": "codecov"
+    "coverage": "codecov",
+    "release": "release-it --no-npm.publish --src.tagName='v%s' --github.release"
   },
   "husky": {
     "hooks": {
