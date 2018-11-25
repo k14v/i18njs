@@ -1,38 +1,59 @@
 {
-  "name": "i18njs",
-  "version": "0.0.1",
-  "description": "internationalization",
+  "name": "@k14v/i18njs",
+  "version": "0.0.2",
+  "description": "Library to internationalize literals",
   "main": "src/index.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text ava --verbose",
-    "build": "babel src --out-dir lib"
+    "test": "nyc --reporter=lcov --reporter=html --reporter=text ava",
+    "test:watch": "ava --watch",
+    "build": "babel src --out-dir lib",
+    "watch": "npm run build -- --watch",
+    "prepublishOnly": "npm run build && npm run lint && npm run test",
+    "lint": "eslint src examples",
+    "lint:fix": "eslint src examples --fix",
+    "example": "npm run build && babel-node examples/resolver.js",
+    "coverage": "codecov",
+    "release": "release-it -n"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint && npm test"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:rubeniskov/i18njs.git"
   },
   "keywords": [
-    "i18n"
+    "i18n",
+    "l10n"
   ],
   "author": "",
   "license": "MIT",
   "babel": {
     "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-export-namespace-from"
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
     ]
   },
   "ava": {
     "files": [
-      "**/*.spec.js"
+      "src/**/*.spec.js"
     ],
     "require": [
       "@babel/register"
+    ]
+  },
+  "nyc": {
+    "exclude": [
+      "src/*.spec.js"
     ]
   },
   "dependencies": {
@@ -44,22 +65,22 @@
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/register": "^7.0.0",
     "ava": "^1.0.0-rc.1",
     "babel-eslint": "^10.0.1",
+    "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.9.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-loader": "^2.1.1",
+    "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "machine-uuid": "^1.2.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.1.4",
     "nyc": "^13.0.1",
+    "release-it": "^8.0.1",
     "sinon": "^7.1.1"
-  },
-  "peerDependencies": {}
+  }
 }
