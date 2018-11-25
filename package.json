@@ -9,8 +9,8 @@
     "build": "babel src --out-dir lib",
     "watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
+    "lint": "eslint src examples",
+    "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
     "coverage": "codecov"
   },
