@@ -32,16 +32,19 @@
   "license": "MIT",
   "babel": {
     "presets": [
-      ["@babel/preset-env", {
-        "targets": {
-          "node": "current"
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
         }
-      }]
+      ]
     ]
   },
   "ava": {
     "files": [
-      "**/*.spec.js"
+      "src/**/*.spec.js"
     ],
     "require": [
       "@babel/register"
