@@ -5,5 +5,8 @@
     "push": true,
     "tag": true
   },
+  "npm": {
+    "publish": true
+  },
   "requireUpstream": false
 }
