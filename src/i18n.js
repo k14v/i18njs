@@ -48,5 +48,9 @@ export default (options = {}) => {
     },
   };
 
+  if (currentLocale) {
+    self.setLocale(currentLocale);
+  }
+
   return self;
 };
