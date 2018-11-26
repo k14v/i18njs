@@ -13,7 +13,7 @@
     "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
     "coverage": "codecov",
-    "release": "release-it -n"
+    "release": "release-it -n -i"
   },
   "husky": {
     "hooks": {
