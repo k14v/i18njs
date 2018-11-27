@@ -10,8 +10,8 @@ export const ERR_MSGS = {
 
 // Events ENUM
 export const STORE_EVENTS = {
-  LOADING: 'loading',
-  LOADED: 'loaded',
+  RESOLVING: 'resolving',
+  RESOLVED: 'resolved',
   ERROR: 'error',
 };
 
@@ -51,7 +51,7 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
       };
     },
     resolve: (locale) => {
-      store.emit(STORE_EVENTS.LOADING, { locale, cache });
+      store.emit(STORE_EVENTS.RESOLVING, { locale, cache });
       return (!locale
         ? Promise
           .reject(new Error(ERR_MSGS.LOCALE_UNDEFINED))
@@ -60,8 +60,8 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
       )
         .then((catalog) => {
           if (catalog) {
-            store.emit(STORE_EVENTS.LOADED, { locale, cache, catalog });
             Object.assign(cache, { [locale]: catalog });
+            store.emit(STORE_EVENTS.RESOLVED, { locale, cache, catalog });
             return catalog;
           } else {
             return Promise.reject(new Error(ERR_MSGS.LOCALE_NOT_FOUND));
