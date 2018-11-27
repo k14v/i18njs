@@ -1,5 +1,5 @@
-import { assert } from './utils';
-import createStore from './createStore';
+import { assert, createSubscriber } from './utils';
+import createStore, { STORE_EVENTS } from './createStore';
 import createTranslators from './createTranslators';
 
 // Events ENUM
@@ -61,5 +61,7 @@ export default (options = {}) => {
     self.setLocale(currentLocale);
   }
 
-  return self;
+  return Object.assign(self, {
+    subscribe: createSubscriber(self, [...Object.values(I18N_EVENTS), ...Object.values(STORE_EVENTS)]),
+  });
 };

@@ -1,6 +1,6 @@
 // Core
 import EventEmitter from 'events';
-import { assert } from './utils';
+import { assert, createSubscriber } from './utils';
 
 // Errors ENUM
 export const ERR_MSGS = {
@@ -27,29 +27,6 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
       typeof eventName === 'function'
         ? store.removeAllListeners(eventName)
         : store.removeListener(eventName, listener),
-    subscribe: (eventName, listener) => {
-      if (typeof eventName === 'function') {
-        listener = eventName;
-        // Subscribe all events
-        return Object
-          .values(STORE_EVENTS)
-          .reduce((prev, type) => {
-            const unsubscribe = store.subscribe(type, (evt) => listener({ ...evt, type }));
-            // Recursive unsubscribe binding
-            return () => {
-              if (prev) {
-                prev();
-              }
-              unsubscribe();
-            };
-          }, null);
-      }
-      // Single event subscribe
-      store.on(eventName, listener);
-      return () => {
-        store.off(eventName, listener);
-      };
-    },
     resolve: (locale) => {
       store.emit(STORE_EVENTS.RESOLVING, { locale, cache });
       return (!locale
@@ -76,5 +53,7 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
 
   EventEmitter.call(store);
 
-  return store;
+  return Object.assign(store, {
+    subscribe: createSubscriber(store, Object.values(STORE_EVENTS)),
+  });
 };
