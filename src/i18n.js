@@ -1,7 +1,13 @@
-import { assert } from './utils';
-import createStore from './createStore';
+import { assert, createSubscriber } from './utils';
+import createStore, { STORE_EVENTS } from './createStore';
 import createTranslators from './createTranslators';
 
+// Events ENUM
+export const I18N_EVENTS = {
+  LOADING: 'loading',
+  LOADED: 'loaded',
+  ERROR: 'error',
+};
 
 export default (options = {}) => {
   options = { ...options };
@@ -30,8 +36,11 @@ export default (options = {}) => {
     setLocale (locale) {
       let targetLocale = !cache[locale] && fallbacks[locale] ? fallbacks[locale] : locale;
       targetLocale = currentLocale = locales.includes(targetLocale) ? targetLocale : defaultLocale;
+      self.emit(I18N_EVENTS.LOADING, { locale });
       return store.resolve(targetLocale).then((catalog) => {
-        return (self.trls = createTranslators(catalog));
+        const trls = self.trls = createTranslators(catalog);
+        self.emit(I18N_EVENTS.LOADED, { locale, trls, catalog });
+        return trls;
       });
     },
     getLocales () {
@@ -52,5 +61,7 @@ export default (options = {}) => {
     self.setLocale(currentLocale);
   }
 
-  return self;
+  return Object.assign(self, {
+    subscribe: createSubscriber(self, [...Object.values(I18N_EVENTS), ...Object.values(STORE_EVENTS)]),
+  });
 };

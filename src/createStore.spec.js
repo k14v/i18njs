@@ -124,11 +124,17 @@ test('should subscribe all events', async t => {
     cache: { en: {} },
   });
 
-  const sequence = ['loading', 'loaded', 'loading', 'error'];
+  const sequence = [
+    STORE_EVENTS.RESOLVING,
+    STORE_EVENTS.RESOLVED,
+    STORE_EVENTS.RESOLVING,
+    STORE_EVENTS.ERROR,
+  ];
   let index = 0;
 
   t.plan(5);
   store.subscribe(({ type }) => {
+    console.log(type);
     t.is(type, sequence[index++]);
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "@k14v/i18njs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Library to internationalize literals",
   "main": "src/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
     "coverage": "codecov",
-    "release": "release-it -n -i"
+    "release": "release-it -n"
   },
   "husky": {
     "hooks": {

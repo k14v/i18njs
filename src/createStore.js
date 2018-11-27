@@ -1,6 +1,6 @@
 // Core
 import EventEmitter from 'events';
-import { assert } from './utils';
+import { assert, createSubscriber } from './utils';
 
 // Errors ENUM
 export const ERR_MSGS = {
@@ -10,8 +10,8 @@ export const ERR_MSGS = {
 
 // Events ENUM
 export const STORE_EVENTS = {
-  LOADING: 'loading',
-  LOADED: 'loaded',
+  RESOLVING: 'resolving',
+  RESOLVED: 'resolved',
   ERROR: 'error',
 };
 
@@ -27,31 +27,8 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
       typeof eventName === 'function'
         ? store.removeAllListeners(eventName)
         : store.removeListener(eventName, listener),
-    subscribe: (eventName, listener) => {
-      if (typeof eventName === 'function') {
-        listener = eventName;
-        // Subscribe all events
-        return Object
-          .values(STORE_EVENTS)
-          .reduce((prev, type) => {
-            const unsubscribe = store.subscribe(type, (evt) => listener({ ...evt, type }));
-            // Recursive unsubscribe binding
-            return () => {
-              if (prev) {
-                prev();
-              }
-              unsubscribe();
-            };
-          }, null);
-      }
-      // Single event subscribe
-      store.on(eventName, listener);
-      return () => {
-        store.off(eventName, listener);
-      };
-    },
     resolve: (locale) => {
-      store.emit(STORE_EVENTS.LOADING, { locale, cache });
+      store.emit(STORE_EVENTS.RESOLVING, { locale, cache });
       return (!locale
         ? Promise
           .reject(new Error(ERR_MSGS.LOCALE_UNDEFINED))
@@ -60,8 +37,8 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
       )
         .then((catalog) => {
           if (catalog) {
-            store.emit(STORE_EVENTS.LOADED, { locale, cache, catalog });
             Object.assign(cache, { [locale]: catalog });
+            store.emit(STORE_EVENTS.RESOLVED, { locale, cache, catalog });
             return catalog;
           } else {
             return Promise.reject(new Error(ERR_MSGS.LOCALE_NOT_FOUND));
@@ -76,5 +53,7 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
 
   EventEmitter.call(store);
 
-  return store;
+  return Object.assign(store, {
+    subscribe: createSubscriber(store, Object.values(STORE_EVENTS)),
+  });
 };
