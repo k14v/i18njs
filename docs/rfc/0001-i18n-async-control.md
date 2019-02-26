@@ -1,6 +1,6 @@
 * Start Date: 2018-11-23
-* RFC PR: https://github.com/rubeniskov/i18njs/pull/2
-* i18n Issue: https://github.com/rubeniskov/i18njs/pull/1
+* RFC PR: https://github.com/k14v/i18njs/pull/2
+* i18n Issue: https://github.com/k14v/i18njs/pull/1
 
 # Summary
 
@@ -42,12 +42,10 @@ const unsubscribe = i18n.subscribe(({type, locale}) => {
 # Motivation
 
 Typically, when an application wants to handle the load of locales when the logic is asynchronous,
-the application needs a feedback to the handle the current status of that logic and decide if user interactions
-should be frozen in order to wait until the process finished.
+the application needs a feedback to the handle the current status and decide if your program needs
+be frozen order to wait until the process finished. One posible solution would be use `resolver` option when the locales is loading and use a the `then` method of a `promise` to raise the loaded state. But this way has some restrictions and limitations.
 
 ## Why not use the `resolver` options
-
-One posible solution would be put the control state logic inside resolver function.
 
 ```js
 import i18njs from 'i18njs'
@@ -65,8 +63,8 @@ const i18n = i18njs({
 ```
 
 This solve one casuistic, but this logic might be controlled in different points it wouldn't
-be posible because the declaration would be placed in other file.
+be possible because the `handler` logic would be placed in other file.
 
-With events you can ***subscribe*** or ***unsubscribe*** in
+The solution to solve this casuistic starts from use events `loading`, `loaded` and `error` it can be used to handle the state flow.
 
 Another requirement would be use a subscribe function as observable to handle the unsubscribe automatically and avoid the use of `on` and `off` in order to handle this behaviour in one step.
