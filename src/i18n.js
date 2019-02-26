@@ -19,7 +19,8 @@ export default (options = {}) => {
     locales = Object.keys(options.locales || {});
     cache = { ...options.locales };
   }
-  // if options.locales has own properties defined will extend the cache as sync catalog
+  // if options.locales has own properties defined it will be used to extend
+  // the cache as sync catalog
   const fallbacks = options.fallbacks || {};
   const resolver = options.resolver;
   const store = createStore({ cache, resolver, locales });
@@ -32,7 +33,16 @@ export default (options = {}) => {
     ...store,
     // To preserve the translator functions we pass a null catalog
     // to force the checker raise a warning when the translators being called
+    /**
+     * Translation singleton with all interpolation utilities
+     * corresponding to the current locale
+     * @type {Object}
+     */
     trls: createTranslators(null),
+    /**
+     * Updates the current locale and refresh trls singleton
+     * @param {[type]} locale [description]
+     */
     setLocale (locale) {
       let targetLocale = !cache[locale] && fallbacks[locale] ? fallbacks[locale] : locale;
       targetLocale = currentLocale = locales.includes(targetLocale) ? targetLocale : defaultLocale;
@@ -43,24 +53,42 @@ export default (options = {}) => {
         return trls;
       });
     },
+    /**
+     * Obtain and array of string ISO_639 with all loaded locales
+     * @return {Array} Array of string [ISO_639-1](https://es.wikipedia.org/wiki/ISO_639-1)
+     */
     getLocales () {
       return Object.keys(locales);
     },
+    /**
+     * Obtain current locale ISO_639
+     * @return {string} [ISO_639-1](https://es.wikipedia.org/wiki/ISO_639-1)
+     */
     getLocale () {
       return currentLocale;
     },
+    /**
+     * Get current catalog of literal translations from cache
+     * @return {Object}
+     */
     getCatalog (locale = currentLocale) {
       return cache[locale];
     },
+    /**
+     * Get all catalogs of literal translations
+     * @return {Object}
+     */
     getCatalogs () {
-      return locales;
+      return cache;
     },
   };
 
+  // If currentLocale is setted then force to remap trls with the selected locale
   if (currentLocale) {
     self.setLocale(currentLocale);
   }
 
+  // Extends self factory appending a subscriber method with all posible events
   return Object.assign(self, {
     subscribe: createSubscriber(self, [...Object.values(I18N_EVENTS), ...Object.values(STORE_EVENTS)]),
   });
