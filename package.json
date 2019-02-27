@@ -15,6 +15,7 @@
     "coverage": "codecov",
     "release": "release-it -n"
   },
+  "homepage": "https://github.com/k14v/i18njs#readme",
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
@@ -23,13 +24,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rubeniskov/i18njs.git"
+    "url": "git@github.com:k14v/i18njs.git"
   },
   "keywords": [
     "i18n",
     "l10n"
   ],
-  "author": "",
+  "author": {
+    "name": "k14v",
+    "url": "https://github.com/k14v"
+  },
+  "contributors": [
+    {
+      "name": "Rubeniskov",
+      "email": "me@rubeniskov.com",
+      "url": "https://rubeniskov.com"
+    },
+    {
+      "name": "Kelvur",
+      "url": "https://github.com/Kelvur"
+    }
+  ],
   "license": "MIT",
   "babel": {
     "presets": [
