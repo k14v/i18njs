@@ -37,6 +37,8 @@ const postProcessLiteral = literal => {
 };
 
 export default (catalog) => {
+  // Reset warning store to show assertion messages of this catalog
+  warn.clear();
   const catalogChecker = createCatalogChecker(catalog);
   const getLiteral = getterLiteral(catalog);
   const getLiteralPlural = getterLiteralPlural(catalog);

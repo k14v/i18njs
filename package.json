@@ -1,10 +1,10 @@
 {
   "name": "@k14v/i18njs",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Library to internationalize literals",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=lcov --reporter=html --reporter=text ava",
+    "test": "nyc --reporter=lcov --reporter=html --reporter=text ava --verbose",
     "test:watch": "ava --watch",
     "build": "babel src --out-dir=lib --ignore=**/*.spec.js",
     "watch": "npm run build -- --watch",
@@ -51,6 +51,7 @@
     ]
   },
   "dependencies": {
+    "fast-memoize": "^2.5.1",
     "make-plural": "^4.3.0",
     "math-interval-parser": "^2.0.0",
     "messageformat": "^2.0.4",
@@ -74,7 +75,7 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^1.1.4",
-    "nyc": "^13.0.1",
+    "nyc": "^13.3.0",
     "release-it": "^8.0.1",
     "sinon": "^7.1.1"
   }
