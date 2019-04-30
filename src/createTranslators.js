@@ -27,6 +27,10 @@ export default (catalog) => {
   };
 
   const processLiteral = (literal) => {
+    if (!catalog) {
+      return literal;
+    }
+
     if (typeof catalog[literal] === 'string') {
       return catalog[literal];
     }

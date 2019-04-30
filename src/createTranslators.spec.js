@@ -66,3 +66,9 @@ test('it should return plural translation', (t) => {
   const trls = createTranslators(locales.en);
   t.is(trls.__('Tengo 5 gato'), locales.en['Tengo %d gato'].other);
 });
+
+
+test('it should return same literal as fallback when catalog is null', (t) => {
+  const trls = createTranslators(null);
+  t.is(trls.__('Tengo 5 gato'), 'Tengo 5 gato');
+});
