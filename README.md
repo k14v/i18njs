@@ -65,3 +65,40 @@ i18n.setLocale('de').then(trls => {
 ```javascript
 trls.__('esto es una prueba')
 ```
+
+
+# Dynamic translations
+
+
+```javascript
+const i18n = i18njs({
+  locales: {
+    en: {
+      'Group': 'Grupo',
+      'The cow': 'La vaca',
+      'the fence': 'la valla',
+      'The rabbit': 'El conejo',
+      'the table': 'la mesa',
+      'Sometimes I drink %d beers': {
+        one: 'A veces me bebo una cerveza',
+        other: 'A veces me bebo muchas cervezas',
+      },
+      '%s jumped over %s, %d times': {
+        one: '%s saltó por encima de %s, una vez',
+        other: '%s saltó por encima de %s, %d veces'
+      }
+    }
+  },
+});
+
+
+
+i18n.trls.__('Sometimes I drink 1 beers')
+// A veces me bebo una cerveza
+i18n.trls.__('Sometimes I drink 10 beers')
+// A veces me bebo muchas cervezas
+i18n.trls.__('The cow jumped over the fence, 10 times')
+// La vaca saltó por encima de la valla, 10 veces
+i18n.trls.__('The rabbit jumped over the table, 1 times')
+// El conejo saltó por encima de la mesa, una vez
+```

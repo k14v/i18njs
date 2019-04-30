@@ -7,7 +7,7 @@ const locales = {
     'esto es una prueba': 'esto es una prueba',
     'Teléfono': 'Teléfono',
     'Perro': 'Perro',
-    'Tengo %s gato': {
+    'Tengo %d gato': {
       'one': 'Tengo un gato',
       'other': 'Tengo algunos gatos',
     },
@@ -16,7 +16,7 @@ const locales = {
     'esto es una prueba': 'this is a test',
     'Teléfono': 'Phone',
     'Perro': 'Dog',
-    'Tengo %s gato': {
+    'Tengo %d gato': {
       'one': 'I have a cat',
       'other': 'I have some cats',
     },
@@ -25,54 +25,50 @@ const locales = {
     'esto es una prueba': 'Das ist ein Test',
     'Teléfono': 'Telefon',
     'Perro': 'Hund',
-    'Tengo %s gato': {
+    'Tengo %d gato': {
       'one': 'Ich habe eine katze',
       'other': 'Ich habe mehrere Katzen',
     },
   },
 };
 
-test('should be a function', (t) => {
-  t.true(typeof createTranslators === 'function');
+test('it should be a function', (t) => {
+  t.is(typeof createTranslators, 'function');
 });
 
-test('should return an object', (t) => {
+test('it should return an object', (t) => {
   const trls = createTranslators(locales.en);
-  t.true(typeof trls === 'object');
+  t.is(typeof trls, 'object');
 });
 
-test('trls should have __ function', (t) => {
+test('it should have __ function', (t) => {
   const trls = createTranslators(locales.en);
-  t.true(typeof trls.__ === 'function');
+  t.is(typeof trls.__, 'function');
 });
 
-test('__ function should return translation', (t) => {
+test('it should return translation', (t) => {
   const trls = createTranslators(locales.en);
-  t.true(trls.__('Perro') === locales.en.Perro);
+  t.is(trls.__('Perro'), locales.en.Perro);
 });
 
-test('__ function should return literal as fallback', (t) => {
+test('it should return literal as fallback', (t) => {
   const trls = createTranslators(locales.en);
   const literalNonExists = 'abcdeABCDEzzzz0198';
-  t.true(trls.__(literalNonExists) === literalNonExists);
+  t.is(trls.__(literalNonExists), literalNonExists);
 });
 
-test('__ function should return singular translation when encountered object as translation', (t) => {
+test('it should return singular translation', (t) => {
   const trls = createTranslators(locales.en);
-  t.true(trls.__('Tengo %s gato') === locales.en['Tengo %s gato'].one);
+  t.is(trls.__('Tengo 1 gato'), locales.en['Tengo %d gato'].one);
 });
 
-test('trls should have __n function', (t) => {
+test('it should return plural translation', (t) => {
   const trls = createTranslators(locales.en);
-  t.true(typeof trls.__n === 'function');
+  t.is(trls.__('Tengo 5 gato'), locales.en['Tengo %d gato'].other);
 });
 
-test('__n function should return singular translation', (t) => {
-  const trls = createTranslators(locales.en);
-  t.true(trls.__n('Tengo %s gato', 1) === 'I have a cat');
-});
 
-test('__n function should return plural translation', (t) => {
-  const trls = createTranslators(locales.en);
-  t.true(trls.__n('Tengo %s gato', 5) === 'I have some cats');
+test('it should return same literal as fallback when catalog is null', (t) => {
+  const trls = createTranslators(null);
+  t.is(trls.__('Tengo 5 gato'), 'Tengo 5 gato');
 });
