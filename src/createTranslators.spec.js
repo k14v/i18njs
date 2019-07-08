@@ -1,5 +1,8 @@
-import test from 'ava';
+// Core
 import createTranslators from './createTranslators';
+// Test
+import test from 'ava';
+import sinon from 'sinon';
 
 
 const locales = {
@@ -67,8 +70,15 @@ test('it should return plural translation', (t) => {
   t.is(trls.__('Tengo 5 gato'), locales.en['Tengo %d gato'].other);
 });
 
-
 test('it should return same literal as fallback when catalog is null', (t) => {
   const trls = createTranslators(null);
   t.is(trls.__('Tengo 5 gato'), 'Tengo 5 gato');
+});
+
+test('it should return empty string and don\'t throw a warning when given a empty string to translate', (t) => {
+  const trls = createTranslators(locales.en);
+  const spy = sinon.spy(console, 'warn');
+  t.is(trls.__(''), '');
+  t.true(spy.callCount === 0);
+  spy.restore();
 });
