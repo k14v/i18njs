@@ -27,7 +27,7 @@ export default (catalog) => {
   };
 
   const processLiteral = (literal) => {
-    if (!catalog) {
+    if (!catalog || literal === '') {
       return literal;
     }
 
