@@ -1,6 +1,12 @@
 {
   "parser": "babel-eslint",
-  "extends": "standard",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "plugins": ["import"],
   "rules": {
     "semi": [2, "always"],
     "comma-dangle": ["error", "always-multiline"],
