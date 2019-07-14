@@ -1,5 +1,7 @@
-import test from 'ava';
+// Core
 import i18njs from './i18n';
+// Test
+import test from 'ava';
 
 
 test('should be a function', (t) => {
@@ -28,7 +30,7 @@ test.cb('should change trls before event loaded is raised', t => {
     locales,
   });
 
-  i18n.on('loaded', ({ locale, catalog }) => {
+  i18n.on('loaded', ({ locale }) => {
     t.is(i18n.trls.__('foo'), locales[locale]['foo']);
     if (locale === 'en') t.end();
   });

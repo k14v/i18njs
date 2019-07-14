@@ -1,5 +1,6 @@
 // Core
 import EventEmitter from 'events';
+// Utils
 import { assert, createSubscriber } from './utils';
 
 // Errors ENUM
@@ -15,12 +16,12 @@ export const STORE_EVENTS = {
   ERROR: 'error',
 };
 
-export const defaultResolver = (locale, cache, options) => {
+export const defaultResolver = (locale, cache) => {
   assert(cache[locale], `No locale implemented for: ${locale}`);
   return Promise.resolve(cache[locale]);
 };
 
-export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {}) => {
+const createStore = ({ cache = {}, resolver = defaultResolver, ...restOptions } = {}) => {
   const store = {
     ...EventEmitter.prototype,
     off: (eventName, listener) =>
@@ -57,3 +58,5 @@ export default ({ cache = {}, resolver = defaultResolver, ...restOptions } = {})
     subscribe: createSubscriber(store, Object.values(STORE_EVENTS)),
   });
 };
+
+export default createStore;

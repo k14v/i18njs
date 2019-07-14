@@ -1,3 +1,4 @@
+// Utils
 import tokenize from '@k14v/printf-tokenize';
 import rexpmat from '@k14v/rexpmat';
 import printf from 'printf';
@@ -12,7 +13,7 @@ const createCatalogChecker = (catalog) => fn => (...args) => {
   return fn(...args);
 };
 
-export default (catalog) => {
+const createTranslators = (catalog) => {
   // Reset warning store to show assertion messages of this catalog
   warn.clear();
   const catalogChecker = createCatalogChecker(catalog);
@@ -38,7 +39,7 @@ export default (catalog) => {
     const match = matchPattern(literal, regexpMap);
     if (!match) {
       return literal;
-    };
+    }
     const regexp = match[0];
     const literalScheme = catalog[match[1]];
     // TODO rexpmat must return a string not a regexp because
@@ -70,7 +71,7 @@ export default (catalog) => {
         }
       } else {
         console.warn('Number not found to handle plural');
-      };
+      }
     }
 
     if (!match[1]) {
@@ -91,3 +92,4 @@ export default (catalog) => {
   {});
 };
 
+export default createTranslators;

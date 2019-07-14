@@ -1,5 +1,7 @@
-import test from 'ava';
+// Core
 import createStore, { ERR_MSGS, STORE_EVENTS } from './createStore';
+// Test
+import test from 'ava';
 
 
 test('should return a store', (t) => {
@@ -62,7 +64,7 @@ test('should call the resolver with the options passed by arguments', async t =>
 test('should return a catalog using resolver async', async t => {
   const localeEN = {};
   const store = createStore({
-    resolver: locale => new Promise(resolve => setTimeout(() => resolve(localeEN), 600)),
+    resolver: () => new Promise(resolve => setTimeout(() => resolve(localeEN), 600)),
   });
 
   const catalog = await store.resolve('en');
@@ -147,7 +149,7 @@ test('should unsubscribe of any events', async t => {
     cache: { en: {} },
   });
 
-  const unsubscribe = store.subscribe((eventName) => {
+  const unsubscribe = store.subscribe(() => {
     t.fail();
   });
 

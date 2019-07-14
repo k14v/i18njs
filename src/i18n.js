@@ -1,6 +1,8 @@
-import { assert, createSubscriber } from './utils';
+// Core
 import createStore, { STORE_EVENTS } from './createStore';
 import createTranslators from './createTranslators';
+// Utils
+import { assert, createSubscriber } from './utils';
 
 // Events ENUM
 export const I18N_EVENTS = {
@@ -9,7 +11,7 @@ export const I18N_EVENTS = {
   ERROR: 'error',
 };
 
-export default (options = {}) => {
+const i18n = (options = {}) => {
   options = { ...options };
   // options.locales has to be an array of string with the supported locales,
   // otherwise if object is provided only the keys will be used
@@ -93,3 +95,5 @@ export default (options = {}) => {
     subscribe: createSubscriber(self, [...Object.values(I18N_EVENTS), ...Object.values(STORE_EVENTS)]),
   });
 };
+
+export default i18n;
