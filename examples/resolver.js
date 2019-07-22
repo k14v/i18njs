@@ -34,7 +34,7 @@ const locales = {
 const i18n = i18njs({
   locales: ['es', 'en', 'de'],
   locale: 'es',
-  resolver: (locale) => new Promise((resolve, reject) => setTimeout(() => resolve(locales[locale]), 2000)),
+  resolver: (locale) => new Promise((resolve) => setTimeout(() => resolve(locales[locale]), 2000)),
 });
 
 i18n.on('loading', ({ locale }) => {

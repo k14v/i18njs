@@ -1,3 +1,4 @@
+// Utils
 import memoize from 'fast-memoize';
 
 
@@ -28,7 +29,6 @@ export const assert = (assertion, msg) => {
     warn(msg);
   }
 };
-
 
 export const createSubscriber = (em, events = []) => (eventName, listener) => {
   if (typeof eventName === 'function') {
