@@ -95,6 +95,14 @@ test('it should return empty string and don\'t throw a warning when given a empt
   spy.restore();
 });
 
+test('it should not throw a warning when trying to translate a correct plural literal', (t) => {
+  const trls = createTranslators(locales.en);
+  const spy = sinon.spy(console, 'warn');
+  trls.__('Tengo 3 gato');
+  t.true(spy.callCount === 0);
+  spy.restore();
+});
+
 test('it should throw a warning when trying to translate a plural but there it\'s not a number in the literal', (t) => {
   const trls = createTranslators(locales.en);
   const spy = sinon.spy(console, 'warn');
