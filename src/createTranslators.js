@@ -70,7 +70,7 @@ const createTranslators = (catalog) => {
           return printf(literalScheme.other, ...parsedParams);
         }
       } else {
-        console.warn('Number not found to handle plural');
+        console.warn(`Number not found to handle plural of ${literal}`);
       }
     }
 

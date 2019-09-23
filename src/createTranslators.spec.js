@@ -14,6 +14,10 @@ const locales = {
       'one': 'Tengo un gato',
       'other': 'Tengo algunos gatos',
     },
+    'Tengo %s manzana': {
+      'one': 'Tengo una manzana',
+      'other': 'Tengo varias manzana',
+    },
   },
   en: {
     'esto es una prueba': 'this is a test',
@@ -23,12 +27,20 @@ const locales = {
       'one': 'I have a cat',
       'other': 'I have some cats',
     },
+    'Tengo %s manzana': {
+      'one': 'I have an apple',
+      'other': 'I have some apples',
+    },
   },
   de: {
     'esto es una prueba': 'Das ist ein Test',
     'Teléfono': 'Telefon',
     'Perro': 'Hund',
     'Tengo %d gato': {
+      'one': 'Ich habe eine katze',
+      'other': 'Ich habe mehrere Katzen',
+    },
+    'Tengo %s manzana': {
       'one': 'Ich habe eine katze',
       'other': 'Ich habe mehrere Katzen',
     },
@@ -80,5 +92,22 @@ test('it should return empty string and don\'t throw a warning when given a empt
   const spy = sinon.spy(console, 'warn');
   t.is(trls.__(''), '');
   t.true(spy.callCount === 0);
+  spy.restore();
+});
+
+test('it should not throw a warning when trying to translate a correct plural literal', (t) => {
+  const trls = createTranslators(locales.en);
+  const spy = sinon.spy(console, 'warn');
+  trls.__('Tengo 3 gato');
+  t.true(spy.callCount === 0);
+  spy.restore();
+});
+
+test('it should throw a warning when trying to translate a plural but there it\'s not a number in the literal', (t) => {
+  const trls = createTranslators(locales.en);
+  const spy = sinon.spy(console, 'warn');
+  trls.__('Tengo 5 manzana');
+  t.true(spy.callCount === 1);
+  t.true(spy.args[0][0].includes('Tengo 5 manzana'));
   spy.restore();
 });
