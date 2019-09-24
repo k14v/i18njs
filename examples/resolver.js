@@ -1,4 +1,4 @@
-import i18njs from '..';
+import i18njs from '../src/i18n';
 
 
 const locales = {
@@ -6,7 +6,8 @@ const locales = {
     'esto es una prueba': 'esto es una prueba',
     'Teléfono': 'Teléfono',
     'Perro': 'Perro',
-    'Tengo %s gato': {
+    'El %s le dije a mi mujer que nos casasemos': 'El %s le dije a mi mujer que nos casasemos',
+    'Tengo %d gato': {
       'one': 'Tengo un gato',
       'other': 'Tengo algunos gatos',
     },
@@ -15,7 +16,8 @@ const locales = {
     'esto es una prueba': 'this is a test',
     'Teléfono': 'Phone',
     'Perro': 'Dog',
-    'Tengo %s gato': {
+    'El %s le dije a mi mujer que nos casasemos': 'On %s I told my wife that we got married',
+    'Tengo %d gato': {
       'one': 'I have a cat',
       'other': 'I have some cats',
     },
@@ -24,7 +26,8 @@ const locales = {
     'esto es una prueba': 'Das ist ein Test',
     'Teléfono': 'Telefon',
     'Perro': 'Hund',
-    'Tengo %s gato': {
+    'El %s le dije a mi mujer que nos casasemos': 'Am %s habe ich meiner Frau erzählt, dass wir geheiratet haben',
+    'Tengo %d gato': {
       'one': 'Ich habe eine katze',
       'other': 'Ich habe mehrere Katzen',
     },
@@ -58,8 +61,9 @@ setTimeout(() => {
   i18n.setLocale('en').then(trls => {
     console.log(trls.__('esto es una prueba'));
     console.log(trls.__('Teléfono'));
-    console.log(trls.__n('Tengo %s gato', 1));
-    console.log(trls.__n('Tengo %s gato', 5));
+    console.log(trls.__('Tengo 1 gato'));
+    console.log(trls.__('Tengo 5 gato'));
+    console.log(trls.__('El 12/09/1987 le dije a mi mujer que nos casasemos'));
   });
 });
 
