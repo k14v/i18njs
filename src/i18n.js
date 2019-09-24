@@ -24,8 +24,7 @@ const i18n = (options = {}) => {
   // if options.locales has own properties defined it will be used to extend
   // the cache as sync catalog
   const fallbacks = options.fallbacks || {};
-  const resolver = options.resolver;
-  const store = createStore({ cache, resolver, locales });
+  const store = createStore({ ...options, cache, locales });
   const defaultLocale = options.locale;
   let currentLocale = defaultLocale;
 

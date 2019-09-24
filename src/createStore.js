@@ -1,5 +1,6 @@
 // Core
 import EventEmitter from 'events';
+import mem from 'mem';
 // Utils
 import { assert, createSubscriber } from './utils';
 
@@ -22,6 +23,7 @@ export const defaultResolver = (locale, cache) => {
 };
 
 const createStore = ({ cache = {}, resolver = defaultResolver, ...restOptions } = {}) => {
+  const memoResolver = mem(resolver, restOptions);
   const store = {
     ...EventEmitter.prototype,
     off: (eventName, listener) =>
@@ -34,7 +36,7 @@ const createStore = ({ cache = {}, resolver = defaultResolver, ...restOptions } 
         ? Promise
           .reject(new Error(ERR_MSGS.LOCALE_UNDEFINED))
         : Promise
-          .resolve(resolver(locale, cache, restOptions))
+          .resolve(memoResolver(locale, cache, restOptions))
       )
         .then((catalog) => {
           if (catalog) {
