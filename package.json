@@ -1,6 +1,6 @@
 {
   "name": "@k14v/i18njs",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Library to internationalize literals",
   "main": "index.js",
   "scripts": {
