@@ -1,4 +1,4 @@
-import i18njs from '..';
+import i18njs from '../src/i18n';
 
 
 const i18n = i18njs({

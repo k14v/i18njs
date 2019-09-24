@@ -3,6 +3,7 @@ import createTranslators from './createTranslators';
 // Test
 import test from 'ava';
 import sinon from 'sinon';
+import util from 'util';
 
 
 const locales = {
@@ -10,6 +11,8 @@ const locales = {
     'esto es una prueba': 'esto es una prueba',
     'Teléfono': 'Teléfono',
     'Perro': 'Perro',
+    'Por un beso de tu boca %d caricias te daría': 'Por un beso de tu boca %d caricias te daría',
+    'El %s le dije a mi mujer que nos casasemos': 'El %s le dije a mi mujer que nos casasemos',
     'Tengo %d gato': {
       'one': 'Tengo un gato',
       'other': 'Tengo algunos gatos',
@@ -23,6 +26,8 @@ const locales = {
     'esto es una prueba': 'this is a test',
     'Teléfono': 'Phone',
     'Perro': 'Dog',
+    'Por un beso de tu boca %d caricias te daría': 'For a kiss from your mouth %d caresses would give you',
+    'El %s le dije a mi mujer que nos casasemos': 'On %s I told my wife that we got married',
     'Tengo %d gato': {
       'one': 'I have a cat',
       'other': 'I have some cats',
@@ -36,6 +41,8 @@ const locales = {
     'esto es una prueba': 'Das ist ein Test',
     'Teléfono': 'Telefon',
     'Perro': 'Hund',
+    'Por un beso de tu boca %d caricias te daría': 'Für einen Kuss aus dem Mund würden dir mehrere Liebkosungen geben',
+    'El %s le dije a mi mujer que nos casasemos': 'Am %s habe ich meiner Frau erzählt, dass wir geheiratet haben',
     'Tengo %d gato': {
       'one': 'Ich habe eine katze',
       'other': 'Ich habe mehrere Katzen',
@@ -103,11 +110,17 @@ test('it should not throw a warning when trying to translate a correct plural li
   spy.restore();
 });
 
-test('it should throw a warning when trying to translate a plural but there it\'s not a number in the literal', (t) => {
+test('it should translate using the dynamic parameter', (t) => {
   const trls = createTranslators(locales.en);
-  const spy = sinon.spy(console, 'warn');
-  trls.__('Tengo 5 manzana');
-  t.true(spy.callCount === 1);
-  t.true(spy.args[0][0].includes('Tengo 5 manzana'));
-  spy.restore();
+  const date = '27/07/1998';
+  const literalKey = 'El %s le dije a mi mujer que nos casasemos';
+  t.is(trls.__(util.format(literalKey, date)), util.format(locales.en[literalKey], date));
 });
+
+test('it should translate using the dynamic parameter counter', (t) => {
+  const trls = createTranslators(locales.en);
+  const counter = 2;
+  const literalKey = 'Por un beso de tu boca %d caricias te daría';
+  t.is(trls.__(util.format(literalKey, counter)), util.format(locales.en[literalKey], counter));
+});
+
