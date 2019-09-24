@@ -23,7 +23,7 @@ export const defaultResolver = (locale, cache) => {
 };
 
 const createStore = ({ cache = {}, resolver = defaultResolver, ...restOptions } = {}) => {
-  const memoResolver = mem(resolver);
+  const memoResolver = mem(resolver, restOptions);
   const store = {
     ...EventEmitter.prototype,
     off: (eventName, listener) =>
