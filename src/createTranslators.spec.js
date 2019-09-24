@@ -124,3 +124,19 @@ test('it should translate using the dynamic parameter counter', (t) => {
   t.is(trls.__(util.format(literalKey, counter)), util.format(locales.en[literalKey], counter));
 });
 
+test('it should increase at least 10 times the perfomance when try to translate the same literal in large catalog', (t) => {
+  const catalog = [
+    ...new Array(5000).fill().map(() => 'foo %s bar %d ' + (~~(Math.random() * 0xFFFFFF)).toString(16))]
+  .reduce((prev, value) => ({[value]: value, ...prev}), {
+    'test %s': 'tust %s',
+  });
+
+  const trls = createTranslators(catalog);
+  const start = new Date().getTime();
+  t.is(trls.__('test foo'), 'tust foo');
+  const mid = new Date().getTime();
+  t.is(trls.__('test bar'), 'tust bar');
+  const end = new Date().getTime();
+  t.true((end - mid) / (mid - start) < 0.1);
+});
+

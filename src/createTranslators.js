@@ -1,4 +1,5 @@
 // Utils
+import mem from 'mem';
 import tokenize from '@k14v/printf-tokenize';
 import rexpmat from '@k14v/rexpmat';
 import printf from 'printf';
@@ -27,6 +28,7 @@ const createCatalogChecker = (catalog) => fn => (...args) => {
 const createTranslators = (catalog) => {
   // Reset warning store to show assertion messages of this catalog
   warn.clear();
+  const memoTokenize = mem(tokenize);
   const catalogChecker = createCatalogChecker(catalog);
 
   const regexpMap = Object
@@ -34,8 +36,12 @@ const createTranslators = (catalog) => {
     .filter(literal => /%./.test(literal[0]))
     .map((literal) => [rexpmat(literal[0]), literal[0]]);
 
-  const matchPattern = (str, regexpMap) => {
-    return regexpMap.find(pattern => new RegExp(pattern[0]).test(str));
+  const matchPattern = (str) => {
+    for (let pattern of regexpMap) {
+      if (new RegExp(pattern[0]).test(str)){
+        return pattern;
+      }
+    }
   };
 
   const processLiteral = (literal, opts = {}) => {
@@ -47,7 +53,7 @@ const createTranslators = (catalog) => {
       return catalog[literal];
     }
 
-    const match = matchPattern(literal, regexpMap);
+    const match = matchPattern(literal);
 
     if (!match) {
       return literal;
@@ -61,23 +67,28 @@ const createTranslators = (catalog) => {
 
     let paramTokensDigitLength = 0;
 
-    const paramTokens = tokenize(match[1]).filter(token => token.type === 'Parameter')
-      .map((token, idx) => {
-        let parsedValue = params[idx];
-        switch (token.kind) {
+    const tokens = memoTokenize(match[1]);
+    const paramTokens = [];
+
+    for (let idx = 0, pidx = 0; idx < tokens.length; idx++) {
+      const { type, kind } = tokens[idx];
+      if (type === 'Parameter') {
+        let parsedValue = params[pidx];
+        switch (kind) {
           case 'Number':
-            paramTokensDigitLength ++;
-            parsedValue = parseInt(params[idx]);
+            paramTokensDigitLength++;
+            parsedValue = parseInt(parsedValue);
             break;
           case 'String':
-            parsedValue = processLiteral(params[idx]);
+            parsedValue = processLiteral(parsedValue);
             break;
         }
-        return {
-          ...token,
+        paramTokens[pidx++] = ({
+          ...tokens[idx],
           parsedValue,
-        };
-      });
+        });
+      }
+    }
 
     const { indexPlural, one, other } = literalScheme;
 
