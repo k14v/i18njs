@@ -13,6 +13,7 @@ const locales = {
     'Perro': 'Perro',
     'Por un beso de tu boca %d caricias te daría': 'Por un beso de tu boca %d caricias te daría',
     'El %s le dije a mi mujer que nos casasemos': 'El %s le dije a mi mujer que nos casasemos',
+    'El %d%% de los moviles son moviles inteligentes': 'El %d%% de los moviles son moviles inteligentes',
     'Tengo %d gato': {
       'one': 'Tengo un gato',
       'other': 'Tengo algunos gatos',
@@ -28,6 +29,7 @@ const locales = {
     'Perro': 'Dog',
     'Por un beso de tu boca %d caricias te daría': 'For a kiss from your mouth %d caresses would give you',
     'El %s le dije a mi mujer que nos casasemos': 'On %s I told my wife that we got married',
+    'El %d%% de los moviles son moviles inteligentes': '%d%% der Handys sind Smartphones',
     'Tengo %d gato': {
       'one': 'I have a cat',
       'other': 'I have some cats',
@@ -43,6 +45,7 @@ const locales = {
     'Perro': 'Hund',
     'Por un beso de tu boca %d caricias te daría': 'Für einen Kuss aus dem Mund würden dir mehrere Liebkosungen geben',
     'El %s le dije a mi mujer que nos casasemos': 'Am %s habe ich meiner Frau erzählt, dass wir geheiratet haben',
+    'El %d%% de los moviles son moviles inteligentes': '%d%% der Handys sind Smartphones',
     'Tengo %d gato': {
       'one': 'Ich habe eine katze',
       'other': 'Ich habe mehrere Katzen',
@@ -122,6 +125,13 @@ test('it should translate using the dynamic parameter counter', (t) => {
   const counter = 2;
   const literalKey = 'Por un beso de tu boca %d caricias te daría';
   t.is(trls.__(util.format(literalKey, counter)), util.format(locales.en[literalKey], counter));
+});
+
+test('it should translate using the dynamic and escaping the percent', (t) => {
+  const trls = createTranslators(locales.de);
+  const percent = 95;
+  const literalKey = 'El %d%% de los moviles son moviles inteligentes';
+  t.is(trls.__(util.format(literalKey, percent)), util.format(locales.de[literalKey], percent));
 });
 
 test('it should increase at least 10 times the perfomance when try to translate the same literal in large catalog', (t) => {
