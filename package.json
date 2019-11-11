@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@k14v/printf-tokenize": "0.0.5",
-    "@k14v/rexpmat": "0.0.2",
+    "@k14v/rexpmat": "0.0.3",
     "mem": "5.1.1",
     "printf": "0.5.1"
   },
