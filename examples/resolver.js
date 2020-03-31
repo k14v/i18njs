@@ -58,7 +58,7 @@ console.log(i18n.trls.__('esto es una prueba'));
 console.log(i18n.trls.__('Teléfono'));
 
 setTimeout(() => {
-  i18n.setLocale('en').then(trls => {
+  i18n.setLocale('en').then(({ trls }) => {
     console.log(trls.__('esto es una prueba'));
     console.log(trls.__('Teléfono'));
     console.log(trls.__('Tengo 1 gato'));
