@@ -1,5 +1,6 @@
 // Core
-import createStore, { ERR_MSGS, STORE_EVENTS } from './createStore';
+import createStore from './createStore';
+import { ERR_MSGS, STORE_EVENTS } from './constants';
 // Test
 import test from 'ava';
 

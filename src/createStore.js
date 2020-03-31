@@ -3,19 +3,9 @@ import EventEmitter from 'events';
 import mem from 'mem';
 // Utils
 import { assert, createSubscriber } from './utils';
+// Constants
+import { ERR_MSGS, STORE_EVENTS } from './constants';
 
-// Errors ENUM
-export const ERR_MSGS = {
-  LOCALE_UNDEFINED: 'Undefined locale',
-  LOCALE_NOT_FOUND: 'Locale not found',
-};
-
-// Events ENUM
-export const STORE_EVENTS = {
-  RESOLVING: 'resolving',
-  RESOLVED: 'resolved',
-  ERROR: 'error',
-};
 
 export const defaultResolver = (locale, cache) => {
   assert(cache[locale], `No locale implemented for: ${locale}`);

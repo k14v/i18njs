@@ -1,8 +1,10 @@
 // Core
-import createStore, { STORE_EVENTS } from './createStore';
+import createStore from './createStore';
 import createTranslators from './createTranslators';
 // Utils
 import { assert, createSubscriber } from './utils';
+// Constants
+import { I18N_EVENTS, STORE_EVENTS } from './constants';
 
 // Events ENUM
 export const I18N_EVENTS = {
