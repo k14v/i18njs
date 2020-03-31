@@ -1,5 +1,5 @@
 // Core
-import i18njs from './i18n';
+import i18njs, { fetch } from './i18n';
 // Test
 import test from 'ava';
 

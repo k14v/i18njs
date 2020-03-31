@@ -133,4 +133,21 @@ const i18n = (options = {}) => {
   return self;
 };
 
+/**
+ * Fetch i18n instance with preloaded locale resource
+ * @module i18njs.fetch
+ * @param {!string} options.locale
+ * @example
+ * i18njs
+ *   .fetch({
+ *     locale: 'es',
+ *     resolver: () => Promise.resolve({ 'foo': 'bar' })
+ *     ...options
+ *    })
+ *   .then((i18n) => {
+ *     i18n.trls.__('foo') // bar
+ *   });
+ */
+export const fetch = ({ locale, ...options } = {}) => i18n(options).setLocale(locale);
+
 export default i18n;
