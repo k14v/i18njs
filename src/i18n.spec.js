@@ -38,3 +38,12 @@ test.cb('should change trls before event loaded is raised', t => {
   i18n.setLocale('es');
   i18n.setLocale('en');
 });
+
+test('should return a promise resolved with the locale loaded', async t => {
+  const i18n = await fetch({
+    locale: 'es',
+    resolver: () => Promise.resolve({ foo: 'bar' }),
+  });
+
+  t.is(i18n.trls.__('foo'), 'bar');
+});
