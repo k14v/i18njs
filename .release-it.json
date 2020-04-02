@@ -1,0 +1,12 @@
+{
+  "src": {
+    "commit": true,
+    "commitMessage": "release: Release %s",
+    "push": true,
+    "tag": true
+  },
+  "npm": {
+    "publish": true
+  },
+  "requireUpstream": false
+}

@@ -1,0 +1,18 @@
+language: node_js
+sudo: false
+cache:
+  bundler: true
+  directories:
+  - node_modules # NPM packages
+os:
+- linux
+env:
+- TEST=true
+node_js:
+- '8.12'
+install:
+- npm install
+script:
+- npm run lint
+- npm test
+- npm run coverage
