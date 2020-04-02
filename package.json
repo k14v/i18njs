@@ -12,6 +12,7 @@
     "lint": "eslint src examples",
     "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
+    "docs": "documentation build src/i18n.js -f md --shallow --markdown-toc=false --github",
     "coverage": "codecov",
     "release": "release-it -n"
   },
@@ -80,7 +81,8 @@
     "@babel/register": "7.5.5",
     "ava": "2.2.0",
     "babel-eslint": "10.0.2",
-    "codecov": "3.5.0",
+    "codecov": "^3.6.5",
+    "documentation": "^12.1.4",
     "eslint": "6.1.0",
     "eslint-plugin-import": "2.18.2",
     "husky": "3.0.1",

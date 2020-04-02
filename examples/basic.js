@@ -32,12 +32,12 @@ i18n.on('loaded', ({ locale }) => {
 console.log(i18n.trls.__('esto es una prueba'));
 console.log(i18n.trls.__('Teléfono'));
 
-i18n.setLocale('en').then(trls => {
+i18n.setLocale('en').then(({ trls }) => {
   console.log(trls.__('esto es una prueba'));
   console.log(trls.__('Teléfono'));
 });
 
-i18n.setLocale('de').then(trls => {
+i18n.setLocale('de').then(({ trls }) => {
   console.log(trls.__('esto es una prueba'));
   console.log(trls.__('Teléfono'));
 });
