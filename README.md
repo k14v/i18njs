@@ -133,7 +133,7 @@ const unsubscribe = i18n.subscribe(({ type, locale }) => {
 });
 ```
 
-Returns **[Object][3]** 
+Returns **[object][3]** 
 
 ## i18njs.fetch
 
@@ -155,13 +155,13 @@ i18njs
   });
 ```
 
-[1]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L21-L134 "Source code on GitHub"
+[1]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L21-L134 "Source code on GitHub"
 
 [2]: #options
 
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[4]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L22-L28 "Source code on GitHub"
+[4]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L22-L28 "Source code on GitHub"
 
 [5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
@@ -171,23 +171,23 @@ i18njs
 
 [8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[9]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L54-L54 "Source code on GitHub"
+[9]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L54-L54 "Source code on GitHub"
 
-[10]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L61-L72 "Source code on GitHub"
+[10]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L61-L72 "Source code on GitHub"
 
 [11]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[12]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L78-L80 "Source code on GitHub"
+[12]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L78-L80 "Source code on GitHub"
 
-[13]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L86-L88 "Source code on GitHub"
+[13]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L86-L88 "Source code on GitHub"
 
-[14]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L94-L96 "Source code on GitHub"
+[14]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L94-L96 "Source code on GitHub"
 
-[15]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L102-L104 "Source code on GitHub"
+[15]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L102-L104 "Source code on GitHub"
 
-[16]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L125-L125 "Source code on GitHub"
+[16]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L125-L125 "Source code on GitHub"
 
-[17]: https://github.com/k14v/i18njs/blob/c74042aa581f6e2315e440b7027841e95620b05d/src/i18n.js#L151-L151 "Source code on GitHub"
+[17]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L151-L151 "Source code on GitHub"
 
 
 

@@ -105,7 +105,7 @@ const i18n = (options = {}) => {
     /**
      * Subcribe to the changes of loading state flow
      * @method i18n.subscribe
-     * @return {Object}
+     * @return {object}
      * @example
      * const unsubscribe = i18n.subscribe(({ type, locale }) => {
      *   switch(type) {
