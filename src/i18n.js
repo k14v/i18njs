@@ -1,6 +1,6 @@
 // Core
 import createStore from './createStore';
-import createTranslators from './createTranslators';
+import createTranslator from './createTranslator';
 // Utils
 import { createSubscriber } from './utils';
 // Constants
@@ -48,10 +48,10 @@ const i18n = (options = {}) => {
     /**
      * Translation singleton with all interpolation utilities
      * corresponding to the current locale
-     * @alias i18n.trls
+     * @alias i18n.translate
      * @type {object}
      */
-    trls: createTranslators(null),
+    translate: createTranslator(null),
     /**
      * Updates the current locale and refresh trls singleton
      * @method i18n.setLocale
@@ -65,8 +65,8 @@ const i18n = (options = {}) => {
       return store
         .resolve(targetLocale)
         .then((catalog) => {
-          const trls = self.trls = createTranslators(catalog);
-          store.emit(I18N_EVENTS.LOADED, { locale, trls, catalog });
+          const translate = self.translate = createTranslator(catalog);
+          store.emit(I18N_EVENTS.LOADED, { locale, translate, catalog });
           return self;
         });
     },

@@ -54,22 +54,22 @@ const unsubscribe = i18n.subscribe(({ type, locale }) => {
 
 console.log(unsubscribe);
 
-console.log(i18n.trls.__('esto es una prueba'));
-console.log(i18n.trls.__('Teléfono'));
+console.log(i18n.translate('esto es una prueba'));
+console.log(i18n.translate('Teléfono'));
 
 setTimeout(() => {
-  i18n.setLocale('en').then(({ trls }) => {
-    console.log(trls.__('esto es una prueba'));
-    console.log(trls.__('Teléfono'));
-    console.log(trls.__('Tengo 1 gato'));
-    console.log(trls.__('Tengo 5 gato'));
-    console.log(trls.__('El 12/09/1987 le dije a mi mujer que nos casasemos'));
+  i18n.setLocale('en').then(({ translate }) => {
+    console.log(translate('esto es una prueba'));
+    console.log(translate('Teléfono'));
+    console.log(translate('Tengo 1 gato'));
+    console.log(translate('Tengo 5 gato'));
+    console.log(translate('El 12/09/1987 le dije a mi mujer que nos casasemos'));
   });
 });
 
 // setTimeout(() => {
-//   i18n.setLocale('de').then(trls => {
-//     console.log(i18n.trls.__('esto es una prueba'));
-//     console.log(i18n.trls.__('Teléfono'));
+//   i18n.setLocale('de').then(translate => {
+//     console.log(i18n.translate('esto es una prueba'));
+//     console.log(i18n.translate('Teléfono'));
 //   });
 // }, 4000);

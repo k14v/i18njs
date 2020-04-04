@@ -1,5 +1,5 @@
 // Core
-import createTranslators from './createTranslators';
+import createTranslator from './createTranslator';
 // Test
 import test from 'ava';
 import sinon from 'sinon';
@@ -58,80 +58,75 @@ const locales = {
 };
 
 test('it should be a function', (t) => {
-  t.is(typeof createTranslators, 'function');
-});
-
-test('it should return an object', (t) => {
-  const trls = createTranslators(locales.en);
-  t.is(typeof trls, 'object');
+  t.is(typeof createTranslator, 'function');
 });
 
 test('it should have __ function', (t) => {
-  const trls = createTranslators(locales.en);
-  t.is(typeof trls.__, 'function');
+  const translate = createTranslator(locales.en);
+  t.is(typeof translate, 'function');
 });
 
 test('it should return translation', (t) => {
-  const trls = createTranslators(locales.en);
-  t.is(trls.__('Perro'), locales.en.Perro);
+  const translate = createTranslator(locales.en);
+  t.is(translate('Perro'), locales.en.Perro);
 });
 
 test('it should return literal as fallback', (t) => {
-  const trls = createTranslators(locales.en);
+  const translate = createTranslator(locales.en);
   const literalNonExists = 'abcdeABCDEzzzz0198';
-  t.is(trls.__(literalNonExists), literalNonExists);
+  t.is(translate(literalNonExists), literalNonExists);
 });
 
 test('it should return singular translation', (t) => {
-  const trls = createTranslators(locales.en);
-  t.is(trls.__('Tengo 1 gato'), locales.en['Tengo %d gato'].one);
+  const trls = createTranslator(locales.en);
+  t.is(trls('Tengo 1 gato'), locales.en['Tengo %d gato'].one);
 });
 
 test('it should return plural translation', (t) => {
-  const trls = createTranslators(locales.en);
-  t.is(trls.__('Tengo 5 gato'), locales.en['Tengo %d gato'].other);
+  const trls = createTranslator(locales.en);
+  t.is(trls('Tengo 5 gato'), locales.en['Tengo %d gato'].other);
 });
 
 test('it should return same literal as fallback when catalog is null', (t) => {
-  const trls = createTranslators(null);
-  t.is(trls.__('Tengo 5 gato'), 'Tengo 5 gato');
+  const trls = createTranslator(null);
+  t.is(trls('Tengo 5 gato'), 'Tengo 5 gato');
 });
 
 test('it should return empty string and don\'t throw a warning when given a empty string to translate', (t) => {
-  const trls = createTranslators(locales.en);
+  const trls = createTranslator(locales.en);
   const spy = sinon.spy(console, 'warn');
-  t.is(trls.__(''), '');
+  t.is(trls(''), '');
   t.true(spy.callCount === 0);
   spy.restore();
 });
 
 test('it should not throw a warning when trying to translate a correct plural literal', (t) => {
-  const trls = createTranslators(locales.en);
+  const trls = createTranslator(locales.en);
   const spy = sinon.spy(console, 'warn');
-  trls.__('Tengo 3 gato');
+  trls('Tengo 3 gato');
   t.true(spy.callCount === 0);
   spy.restore();
 });
 
 test('it should translate using the dynamic parameter', (t) => {
-  const trls = createTranslators(locales.en);
+  const trls = createTranslator(locales.en);
   const date = '27/07/1998';
   const literalKey = 'El %s le dije a mi mujer que nos casasemos';
-  t.is(trls.__(util.format(literalKey, date)), util.format(locales.en[literalKey], date));
+  t.is(trls(util.format(literalKey, date)), util.format(locales.en[literalKey], date));
 });
 
 test('it should translate using the dynamic parameter counter', (t) => {
-  const trls = createTranslators(locales.en);
+  const trls = createTranslator(locales.en);
   const counter = 2;
   const literalKey = 'Por un beso de tu boca %d caricias te daría';
-  t.is(trls.__(util.format(literalKey, counter)), util.format(locales.en[literalKey], counter));
+  t.is(trls(util.format(literalKey, counter)), util.format(locales.en[literalKey], counter));
 });
 
 test('it should translate using the dynamic and escaping the percent', (t) => {
-  const trls = createTranslators(locales.de);
+  const trls = createTranslator(locales.de);
   const percent = 95;
   const literalKey = 'El %d%% de los moviles son moviles inteligentes';
-  t.is(trls.__(util.format(literalKey, percent)), util.format(locales.de[literalKey], percent));
+  t.is(trls(util.format(literalKey, percent)), util.format(locales.de[literalKey], percent));
 });
 
 test('it should increase at least 10 times the perfomance when try to translate the same literal in large catalog', (t) => {
@@ -141,11 +136,11 @@ test('it should increase at least 10 times the perfomance when try to translate 
     'test %s': 'tust %s',
   });
 
-  const trls = createTranslators(catalog);
+  const trls = createTranslator(catalog);
   const start = new Date().getTime();
-  t.is(trls.__('test foo'), 'tust foo');
+  t.is(trls('test foo'), 'tust foo');
   const mid = new Date().getTime();
-  t.is(trls.__('test bar'), 'tust bar');
+  t.is(trls('test bar'), 'tust bar');
   const end = new Date().getTime();
   t.true((end - mid) / (mid - start) < 0.1);
 });
