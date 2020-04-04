@@ -29,7 +29,10 @@
   },
   "keywords": [
     "i18n",
-    "l10n"
+    "l10n",
+    "translate",
+    "internationalization",
+    "accessibility"
   ],
   "author": {
     "name": "k14v",
