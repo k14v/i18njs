@@ -61,7 +61,7 @@ test('it should be a function', (t) => {
   t.is(typeof createTranslator, 'function');
 });
 
-test('it should have __ function', (t) => {
+test('it should have translate function', (t) => {
   const translate = createTranslator(locales.en);
   t.is(typeof translate, 'function');
 });

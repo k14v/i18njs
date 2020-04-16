@@ -151,7 +151,7 @@ i18njs
     ...options
    })
   .then((i18n) => {
-    i18n.trls.__('foo') // bar
+    i18n.translate('foo') // bar
   });
 ```
 
@@ -194,7 +194,7 @@ i18njs
 # Using translators
 
 ```javascript
-trls.__('esto es una prueba')
+translate('esto es una prueba')
 ```
 
 
@@ -224,13 +224,13 @@ const i18n = i18njs({
 
 
 
-i18n.trls.__('Sometimes I drink 1 beers')
+i18n.translate('Sometimes I drink 1 beers')
 // A veces me bebo una cerveza
-i18n.trls.__('Sometimes I drink 10 beers')
+i18n.translate('Sometimes I drink 10 beers')
 // A veces me bebo muchas cervezas
-i18n.trls.__('The cow jumped over the fence, 10 times')
+i18n.translate('The cow jumped over the fence, 10 times')
 // La vaca saltó por encima de la valla, 10 veces
-i18n.trls.__('The rabbit jumped over the table, 1 times')
+i18n.translate('The rabbit jumped over the table, 1 times')
 // El conejo saltó por encima de la mesa, una vez
 ```
 
