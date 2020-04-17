@@ -1,6 +1,6 @@
 // Core
 import createStore from './createStore';
-import createTranslators from './createTranslators';
+import createTranslator from './createTranslator';
 // Utils
 import { createSubscriber } from './utils';
 // Constants
@@ -46,14 +46,13 @@ const i18n = (options = {}) => {
     // To preserve the translator functions we pass a null catalog
     // to force the checker raise a warning when the translators being called
     /**
-     * Translation singleton with all interpolation utilities
-     * corresponding to the current locale
-     * @alias i18n.trls
+     * Translation function
+     * @alias i18n.translate
      * @type {object}
      */
-    trls: createTranslators(null),
+    translate: createTranslator(null),
     /**
-     * Updates the current locale and refresh trls singleton
+     * Updates the current locale and refresh translate
      * @method i18n.setLocale
      * @param {string} locale [description]
      * @return {promise}
@@ -65,8 +64,8 @@ const i18n = (options = {}) => {
       return store
         .resolve(targetLocale)
         .then((catalog) => {
-          const trls = self.trls = createTranslators(catalog);
-          store.emit(I18N_EVENTS.LOADED, { locale, trls, catalog });
+          const translate = self.translate = createTranslator(catalog);
+          store.emit(I18N_EVENTS.LOADED, { locale, translate, catalog });
           return self;
         });
     },
@@ -145,7 +144,7 @@ const i18n = (options = {}) => {
  *     ...options
  *    })
  *   .then((i18n) => {
- *     i18n.trls.__('foo') // bar
+ *     i18n.translate('foo') // bar
  *   });
  */
 export const fetch = ({ locale, ...options } = {}) => i18n(options).setLocale(locale);

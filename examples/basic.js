@@ -29,15 +29,15 @@ i18n.on('loaded', ({ locale }) => {
   console.log(`loaded locale: ${locale}`);
 });
 
-console.log(i18n.trls.__('esto es una prueba'));
-console.log(i18n.trls.__('Teléfono'));
+console.log(i18n.translate('esto es una prueba'));
+console.log(i18n.translate('Teléfono'));
 
-i18n.setLocale('en').then(({ trls }) => {
-  console.log(trls.__('esto es una prueba'));
-  console.log(trls.__('Teléfono'));
+i18n.setLocale('en').then(({ translate }) => {
+  console.log(translate('esto es una prueba'));
+  console.log(translate('Teléfono'));
 });
 
-i18n.setLocale('de').then(({ trls }) => {
-  console.log(trls.__('esto es una prueba'));
-  console.log(trls.__('Teléfono'));
+i18n.setLocale('de').then(({ translate }) => {
+  console.log(translate('esto es una prueba'));
+  console.log(translate('Teléfono'));
 });

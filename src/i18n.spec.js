@@ -31,7 +31,7 @@ test.cb('should change trls before event loaded is raised', t => {
   });
 
   i18n.on('loaded', ({ locale }) => {
-    t.is(i18n.trls.__('foo'), locales[locale]['foo']);
+    t.is(i18n.translate('foo'), locales[locale]['foo']);
     if (locale === 'en') t.end();
   });
 
@@ -45,5 +45,5 @@ test('should return a promise resolved with the locale loaded', async t => {
     resolver: () => Promise.resolve({ foo: 'bar' }),
   });
 
-  t.is(i18n.trls.__('foo'), 'bar');
+  t.is(i18n.translate('foo'), 'bar');
 });

@@ -25,7 +25,7 @@ const createCatalogChecker = (catalog) => fn => (...args) => {
   return fn(...args);
 };
 
-const createTranslators = (catalog) => {
+const createTranslator = (catalog) => {
   // Reset warning store to show assertion messages of this catalog
   warn.clear();
   const memoTokenize = mem(tokenize);
@@ -115,14 +115,7 @@ const createTranslators = (catalog) => {
     return printf(one, ...getParsedValues(paramTokens));
   };
 
-  const translators = {
-    __: processLiteral,
-  };
-
-  return Object.keys(translators).reduce((prev, trlsName) => ({
-    ...prev,
-    [trlsName]: catalogChecker(translators[trlsName]) }),
-  {});
+  return catalogChecker(processLiteral);
 };
 
-export default createTranslators;
+export default createTranslator;
