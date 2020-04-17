@@ -22,7 +22,7 @@ $ npm install --save @k14v/i18njs
 
 ## i18n
 
-[src/i18n.js:21-134][1]
+[src/i18n.js:21-133][1]
 
 Provides a instance of i18njs to handle multiple locales asynchronously
 
@@ -56,20 +56,19 @@ Type: [object][3]
 -   `locales` **([Array][6]&lt;[string][5]> | [object][3])?** Array of strings of available locales using the standard [ISO_639-1][7]
 -   `resolver` **[function][8]** used to resolve asyncronous locale resources
 
-## i18n.trls
+## i18n.translate
 
-[src/i18n.js:54-54][9]
+[src/i18n.js:53-53][9]
 
-Translation singleton with all interpolation utilities
-corresponding to the current locale
+Translation function
 
 Type: [object][3]
 
 ## i18n.setLocale
 
-[src/i18n.js:61-72][10]
+[src/i18n.js:60-71][10]
 
-Updates the current locale and refresh trls singleton
+Updates the current locale and refresh translate
 
 ### Parameters
 
@@ -79,7 +78,7 @@ Returns **[promise][11]**
 
 ## i18n.getLocales
 
-[src/i18n.js:78-80][12]
+[src/i18n.js:77-79][12]
 
 Obtain and array of string in ISO_639 format with all loaded locales
 
@@ -87,7 +86,7 @@ Returns **[Array][6]** Array of string [ISO_639-1][7]
 
 ## i18n.getLocale
 
-[src/i18n.js:86-88][13]
+[src/i18n.js:85-87][13]
 
 Obtain current locale ISO_639
 
@@ -95,7 +94,7 @@ Returns **[string][5]** [ISO_639-1][7]
 
 ## i18n.getCatalog
 
-[src/i18n.js:94-96][14]
+[src/i18n.js:93-95][14]
 
 Get current catalog of literal translations from cache
 
@@ -103,7 +102,7 @@ Returns **[object][3]**
 
 ## i18n.getCatalogs
 
-[src/i18n.js:102-104][15]
+[src/i18n.js:101-103][15]
 
 Get all catalogs of literal translations
 
@@ -111,7 +110,7 @@ Returns **[object][3]**
 
 ## i18n.subscribe
 
-[src/i18n.js:125-125][16]
+[src/i18n.js:124-124][16]
 
 Subcribe to the changes of loading state flow
 
@@ -137,7 +136,7 @@ Returns **[object][3]**
 
 ## i18njs.fetch
 
-[src/i18n.js:151-151][17]
+[src/i18n.js:150-150][17]
 
 Fetch i18n instance with preloaded locale resource
 
@@ -155,13 +154,13 @@ i18njs
   });
 ```
 
-[1]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L21-L134 "Source code on GitHub"
+[1]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L21-L133 "Source code on GitHub"
 
 [2]: #options
 
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[4]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L22-L28 "Source code on GitHub"
+[4]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L22-L28 "Source code on GitHub"
 
 [5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
@@ -171,24 +170,23 @@ i18njs
 
 [8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[9]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L54-L54 "Source code on GitHub"
+[9]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L53-L53 "Source code on GitHub"
 
-[10]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L61-L72 "Source code on GitHub"
+[10]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L60-L71 "Source code on GitHub"
 
 [11]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[12]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L78-L80 "Source code on GitHub"
+[12]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L77-L79 "Source code on GitHub"
 
-[13]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L86-L88 "Source code on GitHub"
+[13]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L85-L87 "Source code on GitHub"
 
-[14]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L94-L96 "Source code on GitHub"
+[14]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L93-L95 "Source code on GitHub"
 
-[15]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L102-L104 "Source code on GitHub"
+[15]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L101-L103 "Source code on GitHub"
 
-[16]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L125-L125 "Source code on GitHub"
+[16]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L124-L124 "Source code on GitHub"
 
-[17]: https://github.com/k14v/i18njs/blob/d574e7503611e5dc38f79176137b7ee23779e3a3/src/i18n.js#L151-L151 "Source code on GitHub"
-
+[17]: https://github.com/k14v/i18njs/blob/cf257593b6df60ce958c4c8793809e06c52458bf/src/i18n.js#L150-L150 "Source code on GitHub"
 
 
 # Using translators
@@ -221,7 +219,6 @@ const i18n = i18njs({
     }
   },
 });
-
 
 
 i18n.translate('Sometimes I drink 1 beers')
