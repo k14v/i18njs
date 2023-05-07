@@ -6,7 +6,6 @@ import { assert, createSubscriber } from './utils';
 // Constants
 import { ERR_MSGS, STORE_EVENTS } from './constants';
 
-
 export const defaultResolver = (locale, cache) => {
   assert(cache[locale], `No locale implemented for: ${locale}`);
   return Promise.resolve(cache[locale]);
@@ -22,11 +21,10 @@ const createStore = ({ cache = {}, resolver = defaultResolver, ...restOptions } 
         : store.removeListener(eventName, listener),
     resolve: (locale) => {
       store.emit(STORE_EVENTS.RESOLVING, { locale, cache });
-      return (!locale
-        ? Promise
-          .reject(new Error(ERR_MSGS.LOCALE_UNDEFINED))
-        : Promise
-          .resolve(memoResolver(locale, cache, restOptions))
+      return (
+        !locale
+          ? Promise.reject(new Error(ERR_MSGS.LOCALE_UNDEFINED))
+          : Promise.resolve(memoResolver(locale, cache, restOptions))
       )
         .then((catalog) => {
           if (catalog) {
@@ -37,7 +35,7 @@ const createStore = ({ cache = {}, resolver = defaultResolver, ...restOptions } 
             return Promise.reject(new Error(ERR_MSGS.LOCALE_NOT_FOUND));
           }
         })
-        .catch(err => {
+        .catch((err) => {
           store.emit(STORE_EVENTS.ERROR, err);
           return Promise.reject(err);
         });

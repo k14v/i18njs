@@ -57,24 +57,23 @@ const i18n = (options = {}) => {
      * @param {string} locale [description]
      * @return {promise}
      */
-    setLocale (locale) {
+    setLocale(locale) {
       let targetLocale = !cache[locale] && fallbacks[locale] ? fallbacks[locale] : locale;
-      targetLocale = currentLocale = (locales.includes(targetLocale) ? targetLocale : defaultLocale) || locale;
+      targetLocale = currentLocale =
+        (locales.includes(targetLocale) ? targetLocale : defaultLocale) || locale;
       store.emit(I18N_EVENTS.LOADING, { locale });
-      return store
-        .resolve(targetLocale)
-        .then((catalog) => {
-          const translate = self.translate = createTranslator(catalog);
-          store.emit(I18N_EVENTS.LOADED, { locale, translate, catalog });
-          return self;
-        });
+      return store.resolve(targetLocale).then((catalog) => {
+        const translate = (self.translate = createTranslator(catalog));
+        store.emit(I18N_EVENTS.LOADED, { locale, translate, catalog });
+        return self;
+      });
     },
     /**
      * Obtain and array of string in ISO_639 format with all loaded locales
      * @method i18n.getLocales
      * @return {Array} Array of string [ISO_639-1](https://es.wikipedia.org/wiki/ISO_639-1)
      */
-    getLocales () {
+    getLocales() {
       return Object.keys(locales);
     },
     /**
@@ -82,7 +81,7 @@ const i18n = (options = {}) => {
      * @method i18n.getLocale
      * @return {string} [ISO_639-1](https://es.wikipedia.org/wiki/ISO_639-1)
      */
-    getLocale () {
+    getLocale() {
       return currentLocale;
     },
     /**
@@ -90,7 +89,7 @@ const i18n = (options = {}) => {
      * @method i18n.getCatalog
      * @return {object}
      */
-    getCatalog (locale = currentLocale) {
+    getCatalog(locale = currentLocale) {
       return cache[locale];
     },
     /**
@@ -98,7 +97,7 @@ const i18n = (options = {}) => {
      * @method i18n.getCatalogs
      * @return {object}
      */
-    getCatalogs () {
+    getCatalogs() {
       return cache;
     },
     /**
@@ -121,7 +120,10 @@ const i18n = (options = {}) => {
      * });
      */
     // Create a subscriber method with all posible event
-    subscribe: createSubscriber(store, [...Object.values(I18N_EVENTS), ...Object.values(STORE_EVENTS)]),
+    subscribe: createSubscriber(store, [
+      ...Object.values(I18N_EVENTS),
+      ...Object.values(STORE_EVENTS),
+    ]),
   });
 
   // If currentLocale is setted then force to remap trls with the selected locale
