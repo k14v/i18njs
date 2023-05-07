@@ -20,12 +20,6 @@
     "pre-commit": "lint-staged"
   },
   "homepage": "https://github.com/k14v/i18njs#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm run lint && npm test"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:k14v/i18njs.git"
