@@ -4,7 +4,6 @@ import { ERR_MSGS, STORE_EVENTS } from './constants';
 // Test
 import test from 'ava';
 
-
 test('should return a store', (t) => {
   const store = createStore();
   t.truthy(store);
@@ -21,23 +20,23 @@ test('should return a instance with a resolve function', (t) => {
   t.is(typeof store.resolve, 'function');
 });
 
-test('should raise reject when try resolve an undefined locale', async t => {
+test('should raise reject when try resolve an undefined locale', async (t) => {
   const store = createStore();
   const error = await t.throwsAsync(store.resolve());
   t.is(error.message, ERR_MSGS.LOCALE_UNDEFINED);
 });
 
-test('should raise reject when try resolve a locale that doesn\'t exists', async t => {
+test("should raise reject when try resolve a locale that doesn't exists", async (t) => {
   const store = createStore();
   const error = await t.throwsAsync(store.resolve('de'));
   t.is(error.message, ERR_MSGS.LOCALE_NOT_FOUND);
 });
 
-test('should return a catalog using locales map', async t => {
+test('should return a catalog using locales map', async (t) => {
   const localeEN = {};
   const store = createStore({
     cache: {
-      'en': localeEN,
+      en: localeEN,
     },
   });
 
@@ -46,7 +45,7 @@ test('should return a catalog using locales map', async t => {
   t.true(localeEN === catalog);
 });
 
-test('should call the resolver with the options passed by arguments', async t => {
+test('should call the resolver with the options passed by arguments', async (t) => {
   t.plan(2);
   const localeES = 'es';
   const testArg = 'foo';
@@ -62,10 +61,10 @@ test('should call the resolver with the options passed by arguments', async t =>
   await store.resolve(localeES);
 });
 
-test('should return a catalog using resolver async', async t => {
+test('should return a catalog using resolver async', async (t) => {
   const localeEN = {};
   const store = createStore({
-    resolver: () => new Promise(resolve => setTimeout(() => resolve(localeEN), 600)),
+    resolver: () => new Promise((resolve) => setTimeout(() => resolve(localeEN), 600)),
   });
 
   const catalog = await store.resolve('en');
@@ -73,8 +72,8 @@ test('should return a catalog using resolver async', async t => {
   t.true(localeEN === catalog);
 });
 
-Object.values(STORE_EVENTS).map(eventName => {
-  test(`should subscribe to ${eventName} event`, async t => {
+Object.values(STORE_EVENTS).map((eventName) => {
+  test(`should subscribe to ${eventName} event`, async (t) => {
     const store = createStore({
       cache: { en: {} },
     });
@@ -103,7 +102,7 @@ Object.values(STORE_EVENTS).map(eventName => {
     }
   });
 
-  test(`should unsubscribe of event ${eventName}`, async t => {
+  test(`should unsubscribe of event ${eventName}`, async (t) => {
     const store = createStore({
       cache: { en: {} },
     });
@@ -122,7 +121,7 @@ Object.values(STORE_EVENTS).map(eventName => {
   });
 });
 
-test('should subscribe all events', async t => {
+test('should subscribe all events', async (t) => {
   const store = createStore({
     cache: { en: {} },
   });
@@ -145,7 +144,7 @@ test('should subscribe all events', async t => {
   await t.throwsAsync(store.resolve('es'));
 });
 
-test('should unsubscribe of any events', async t => {
+test('should unsubscribe of any events', async (t) => {
   const store = createStore({
     cache: { en: {} },
   });

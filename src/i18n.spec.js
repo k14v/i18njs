@@ -3,7 +3,6 @@ import i18njs, { fetch } from './i18n';
 // Test
 import test from 'ava';
 
-
 test('should be a function', (t) => {
   t.is(typeof i18njs, 'function');
 });
@@ -20,11 +19,11 @@ test.cb('should call setLocale internally when locale is selected', (t) => {
   });
 });
 
-test.cb('should change trls before event loaded is raised', t => {
+test.cb('should change trls before event loaded is raised', (t) => {
   t.plan(2);
   const locales = {
-    en: { 'foo': 'bar' },
-    es: { 'foo': 'bur' },
+    en: { foo: 'bar' },
+    es: { foo: 'bur' },
   };
   const i18n = i18njs({
     locales,
@@ -39,7 +38,7 @@ test.cb('should change trls before event loaded is raised', t => {
   i18n.setLocale('en');
 });
 
-test('should return a promise resolved with the locale loaded', async t => {
+test('should return a promise resolved with the locale loaded', async (t) => {
   const i18n = await fetch({
     locale: 'es',
     resolver: () => Promise.resolve({ foo: 'bar' }),

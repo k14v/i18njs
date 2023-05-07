@@ -4,17 +4,20 @@
   "description": "Library to internationalize literals",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "test": "nyc --reporter=lcov --reporter=html --reporter=text ava --verbose",
     "test:watch": "ava --watch",
     "build": "babel src --out-dir=lib --ignore=**/*.spec.js",
     "watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build && npm run lint && npm run test",
+    "format": "prettier --write src",
     "lint": "eslint src examples",
     "lint:fix": "eslint src examples --fix",
     "example": "npm run build && babel-node examples/resolver.js",
     "docs": "documentation build src/i18n.js -f md --shallow --markdown-toc=false --github",
     "coverage": "codecov",
-    "release": "release-it -n"
+    "release": "release-it -n",
+    "pre-commit": "lint-staged"
   },
   "homepage": "https://github.com/k14v/i18njs#readme",
   "husky": {
@@ -88,9 +91,18 @@
     "documentation": "^12.1.4",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
-    "husky": "^4.2.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "nyc": "^15.0.1",
+    "prettier": "^2.8.8",
     "release-it": "^13.5.1",
     "sinon": "^9.0.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn format",
+      "yarn lint:fix",
+      "yarn test"
+    ]
   }
 }
